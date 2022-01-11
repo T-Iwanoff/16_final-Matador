@@ -20,7 +20,8 @@ public class Player {
     private String name;
 
     public Player(String name) {
-        playerName = name;
+        this.name = name;
+        GUIPlayer = new GUI_Player(name, 0, getRandomCar());
     }
 
     /** Creates a randomized game piece */
