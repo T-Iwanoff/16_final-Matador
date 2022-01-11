@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Language
 {
-	private static HashMap<String, String> m_translations = new HashMap<>();
+	private static HashMap<String, String> translations = new HashMap<>();
 
 	private Language()
 	{
@@ -26,7 +26,7 @@ public class Language
 				String data = reader.nextLine();
 				try
 				{
-					m_translations.put(data.split(":")[0], data.split(":")[1].trim());
+					translations.put(data.split(":")[0], data.split(":")[1].trim());
 				}
 				catch (Exception e)
 				{
@@ -46,23 +46,25 @@ public class Language
 	/** Returns a string in the current language matching the input key */
 	public static String getLine(String line)
 	{
-		if (m_translations.isEmpty())
+		if (translations.isEmpty())
 		{
 			setLanguage("english");
 		}
-		if (m_translations.get(line) == null)
+		if (translations.get(line) == null)
 		{
 			return "MISSING TRANSLATION (" + line + ")";
 		}
-		return m_translations.get(line);
+		return translations.get(line);
 	}
 
 	/** Returns a string array of all available languages */
 	public static String[] getLanguages()
 	{
+		//Creates an array of all files in the languages directory
 		File folder = new File("languages");
 		File[] listOfFiles = folder.listFiles();
 		assert listOfFiles != null;
+		//Creates a list of all the file names
 		String[] FileList = new String[listOfFiles.length];
 		for (int i = 0; i < listOfFiles.length; i++)
 		{
