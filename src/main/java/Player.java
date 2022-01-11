@@ -1,3 +1,7 @@
+import java.awt.Color;
+import gui_fields.GUI_Car;
+import gui_fields.GUI_Car.Pattern;
+import gui_fields.GUI_Car.Type;
 import gui_fields.GUI_Player;
 
 /**
