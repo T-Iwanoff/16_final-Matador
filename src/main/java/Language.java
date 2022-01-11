@@ -8,10 +8,6 @@ public class Language
 {
 	private static HashMap<String, String> translations = new HashMap<>();
 
-	private Language()
-	{
-	}
-
 	/** Changes the used language */
 	public static void setLanguage(String language)
 	{
