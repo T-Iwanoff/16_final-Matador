@@ -38,8 +38,8 @@ public class Player {
                 Color.white, types[(int) (Math.random() * 4)], Pattern.FILL);
     }
 
-    public GUI_Player getGUIPlayer() {
-        return GUIPlayer;
-    }
-
+    public GUI_Player getGUIPlayer() {return GUIPlayer;}
+    public boolean getInJail() {return inJail;}
+    public boolean getJailCard() {return jailCard;}
+    public int getPosition() {return position;}
 }
