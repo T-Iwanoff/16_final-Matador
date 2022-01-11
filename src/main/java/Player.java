@@ -19,6 +19,10 @@ public class Player {
     private GUI_Player GUIPlayer;
     private String name;
 
+    public Player(String name) {
+        playerName = name;
+    }
+
     /** Creates a randomized game piece */
     private GUI_Car getRandomCar()
     {
