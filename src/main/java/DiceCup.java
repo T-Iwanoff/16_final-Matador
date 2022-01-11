@@ -5,13 +5,8 @@ public class DiceCup {
     /** The face value of the second die */
     private int faceVal2;
     /** The two die objects used in the class */
-    private Die die1, die2;
-
-    /** Constructor. Initiates two die objects */
-    public DiceCup() {
-        Die die1 = new Die(6);
-        Die die2 = new Die(6);
-    }
+    private Die die1 = new Die(6);
+    private Die die2 = new Die(6);
 
     /** Rolls two dice and returns the sum */
     public int rollDice() {
