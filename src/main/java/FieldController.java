@@ -5,7 +5,9 @@ public class FieldController {
     private HashMap<String, Integer> neighbourhoods = new HashMap<>();
     private Field[] fields;
 
+    /** Constructor. Sets up the fields array and the neighbourhoods HashMap */
     public FieldController() {
+        //Creates a field object corresponding to each field in the game
         fields = new Field[28];
         fields[0] = new Field(1,1200,1000,50,250,750,2250,4000,6000,"street","blue"); //Rødovrevej
         fields[1] = new Field(3,1200,1000,50,250,750,2250,4000,6000,"street","blue"); //Hvidovrevej
@@ -35,8 +37,100 @@ public class FieldController {
         fields[25] = new Field(35,"ferry",4000); //Rødby - Puttgarden
         fields[26] = new Field(12,"brewery"); //Tuborg Squash
         fields[27] = new Field(28,"brewery"); //Coca Cola
-
+        //Creates a HashMap Item for each neighbourhood and sets all owner IDs to 0
+        neighbourhoods.put("blue",0);
+        neighbourhoods.put("orange",0);
+        neighbourhoods.put("green",0);
+        neighbourhoods.put("grey",0);
+        neighbourhoods.put("red",0);
+        neighbourhoods.put("white",0);
+        neighbourhoods.put("yellow",0);
+        neighbourhoods.put("purple",0);
     }
 
+    /** Returns the field ID in the field array that corresponds to a position */
+    private int posToNum(int field) {
+        int temp = 0;
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getPosition() == field) {
+                temp = i;
+            }
+        }
+        return temp;
+    }
+
+    /** Returns whether a field is owned by a player */
+    public boolean isOwned(int field) {
+        return (fields[posToNum(field)].getOwner() == 0);
+    }
+
+    /** Returns whether a neighbourhood is owned by a player */
+    public boolean isOwned(String nbh) {
+        return (neighbourhoods.get(nbh) == 0);
+    }
+
+    /** Returns the ID of the player that owns the field. Returns 0 if unowned */
+    public int getOwner(int field) {
+        return fields[posToNum(field)].getOwner();
+    }
+
+    /** Returns the ID of the player that owns the neighbourhood. Returns 0 if unowned */
+    public int getOwner(String nbh) {
+        return neighbourhoods.get(nbh);
+    }
+
+    /** Marks the player as the owner of the field */
+    public void claimField(int field, int player) {
+        fields[posToNum(field)].setOwner(player);
+    }
+
+    /** Marks the player as the owner of the neighbourhood */
+    public void claimNeighbourhood(String nbh, int player) {
+        neighbourhoods.put(nbh,player);
+    }
+
+    /** Sets the number of houses present on the field */
+    public void setHouses(int field, int houses) {
+        fields[posToNum(field)].setHouses(houses);
+    }
+
+    /** Returns the number of houses present on the field */
+    public int getHouses(int field) {
+        return fields[posToNum(field)].getHouses();
+    }
+
+    /** Returns the current rent of the field */
+    public int getRent(int field) {
+        return fields[posToNum(field)].getRent();
+    }
+
+    /** Returns the rent of the field, given a number of houses/ferries/breweries owned */
+    public int getRent(int field, int number) {
+        return fields[posToNum(field)].getRent(number);
+    }
+
+    /** Returns the amount of fields the player owns of a given type */
+    public int getOwnedByType(String type, int player) {
+        int temp = 0;
+        for (Field i : fields) {
+            if (i.getType() == type && i.getOwner() == player) {
+                temp++;
+            }
+        }
+        return temp;
+    }
+
+    /** Returns whether all fields in a neighbourhood is owned by the same player */
+    public boolean checkNeighbourhood(String nbh, int player) {
+        boolean temp = true;
+        for (Field i : fields) {
+            if (i.getNeighbourhood() == nbh) {
+                if (i.getOwner() != player) {
+                    temp = false;
+                }
+            }
+        }
+        return temp;
+    }
 
 }

@@ -3,7 +3,8 @@ public class Field {
     private int[] rent;
     private String type, neighbourhood;
 
-    public Field(int pos, int price, int hprice, //For streets
+    /** Constructor for streets */
+    public Field(int pos, int price, int hprice,
                  int rent0, int rent1, int rent2,
                  int rent3, int rent4, int rent5,
                  String type, String nbh) {
@@ -17,7 +18,8 @@ public class Field {
         neighbourhood = nbh;
     }
 
-    public Field(int pos, String type, int price) { //For breweries
+    /** Constructor for breweries */
+    public Field(int pos, String type, int price) {
         position = pos;
         this.price = price;
         this.type = type;
@@ -25,7 +27,8 @@ public class Field {
         rent = new int[] {0, 100, 200};
     }
 
-    public Field(int pos, String type) { //For ferries
+    /** Constructor for ferries */
+    public Field(int pos, String type) {
         position = pos;
         price = 4000;
         this.type = type;
@@ -47,6 +50,10 @@ public class Field {
 
     public String getType() {
         return type;
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     public int getPrice() {
