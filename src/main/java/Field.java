@@ -69,9 +69,9 @@ public class Field {
         return rent[houses];
     }
 
-    /** Returns the rent corresponding to the specified number of houses/ferries */
-    public int getRent(int ferries) {
-        return rent[ferries];
+    /** Returns the rent corresponding to the specified number of houses/ferries/breweries */
+    public int getRent(int number) {
+        return rent[number];
     }
 
     public int getHouses() {
