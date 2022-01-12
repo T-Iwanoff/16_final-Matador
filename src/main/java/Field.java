@@ -17,20 +17,20 @@ public class Field {
         neighbourhood = nbh;
     }
 
-    public Field(int pos, int price, String type) { //For breweries
+    public Field(int pos, String type, int price) { //For breweries
         position = pos;
         this.price = price;
         this.type = type;
         owner = 0;
+        rent = new int[] {0, 100, 200};
     }
 
-    public Field(int pos, int price, String type, //For ferries
-                 int rent1, int rent2, int rent3, int rent4) {
+    public Field(int pos, String type) { //For ferries
         position = pos;
-        this.price = price;
+        price = 4000;
         this.type = type;
         owner = 0;
-        rent = new int[] {0, rent1, rent2, rent3, rent4};
+        rent = new int[] {0, 500, 1000, 2000, 4000};
     }
 
     public int getOwner() {
