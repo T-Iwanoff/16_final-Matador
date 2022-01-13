@@ -1,0 +1,106 @@
+fC_title;<html><b><font size="7">?
+f1_title;Start
+f2_title;Rødovrevej
+f4_title;Hvidovrevej
+f5_title;Betal indkomst-\nskat
+f6_title;Helsingør - Helsingborg
+f7_title;Roskildevej
+f9_title;Valby Langgade
+f10_title;Allégade
+f11_title;Fængsel
+f12_title;Frederiksberg Allé
+f13_title;Tuborg
+f14_title;Bülowsvej
+f15_title;Gammel Kongevej
+f16_title;Mols-Linien
+f17_title;Bernstorffsvej
+f19_title;Hellerupvej
+f20_title;Strandvejen
+f21_title;Parkering
+f22_title;Trianglen
+f24_title;Østerbrogade
+f25_title;Grønningen
+f26_title;Gedser - Rostock
+f27_title;Bredgade
+f28_title;Kgs. Nytorv
+f29_title;Carlsberg
+f30_title;Østergade
+f31_title;Gå i fængsel
+f32_title;Amagertorv
+f33_title;Vimmel-\nskaftet
+f35_title;Nygade
+f36_title;Rødby - Puttgarden
+f38_title;Frederiks-\nberggade
+f39_title;Ekstra-\nordinær\nstatsskat
+f40_title;Rådhus-\npladsen
+fC_subtext;Prøv lykken
+f1_subtext;Modtag: 4000
+f2_subtext;Pris: 1200
+f4_subtext;Pris: 1200
+f5_subtext;10% el. 4000
+f6_subtext;Pris: 4000
+f7_subtext;Pris: 2000
+f9_subtext;Pris: 2000
+f10_subtext;Pris: 2400
+f11_subtext;Fængsel
+f12_subtext;Pris: 2800
+f13_subtext;Pris: 3000
+f14_subtext;Pris: 2800
+f15_subtext;Pris: 3200
+f16_subtext;Pris: 4000
+f17_subtext;Pris: 3600
+f19_subtext;Pris: 3600
+f20_subtext;Pris: 4000
+f21_subtext;Parkering
+f22_subtext;Pris: 4400
+f24_subtext;Pris: 4400
+f25_subtext;Pris: 4800
+f26_subtext;Pris: 4000
+f27_subtext;Pris: 5200
+f28_subtext;Pris: 5200
+f29_subtext;Pris: 3000
+f30_subtext;Pris: 5600
+f31_subtext;Gå i fængsel
+f32_subtext;Pris: 6000
+f33_subtext;Pris: 6000
+f35_subtext;Pris: 6400
+f36_subtext;Pris: 4000
+f38_subtext;Pris: 7000
+f39_subtext;Betal 2000
+f40_subtext;Pris: 8000
+fC_desc;Træk et chancekort
+f1_desc;Modtag kr. 4000,- når de passerer start
+f2_desc;Rødovrevej
+f4_desc;Hvidovrevej
+f5_desc;Betal indkomstskat 10% eller kr. 4000,-
+f6_desc;Helsingør - Helsingborg
+f7_desc;Roskildevej
+f9_desc;Valby Langgade
+f10_desc;Allégade
+f11_desc;På besøg i fængslet
+f12_desc;Frederiksberg Allé
+f13_desc;Tuborg bryggeri
+f14_desc;Bülowsvej
+f15_desc;Gammel Kongevej
+f16_desc;Mols-Linien
+f17_desc;Bernstorffsvej
+f19_desc;Hellerupvej
+f20_desc;Strandvejen
+f21_desc;Gratis parkering
+f22_desc;Trianglen
+f24_desc;Østerbrogade
+f25_desc;Grønningen
+f26_desc;Gedser - Rostock
+f27_desc;Bredgade
+f28_desc;Kongens Nytorv
+f29_desc;Carlsberg bryggeri
+f30_desc;Østergade
+f31_desc;De fængsles. Slå to ens for at komme ud
+f32_desc;Amagertorv
+f33_desc;Vimmelskaftet
+f35_desc;Nygade
+f36_desc;Rødby - Puttgarden
+f38_desc;Frederiksberggade
+f39_desc;Betal ekstraordinær statsskat: kr. 2000,-
+f40_desc;Rådhuspladsen
+card_none;Der er ikke trukket nogen chancekort endnu
