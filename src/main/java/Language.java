@@ -26,7 +26,7 @@ public class Language
 				}
 				catch (Exception e)
 				{
-					// no translation for the key
+					// Translation invalid
 				}
 			}
 			reader.close();
@@ -48,7 +48,7 @@ public class Language
 		}
 		if (translations.get(line) == null)
 		{
-			return "MISSING TRANSLATION (" + line + ")";
+			return "MISSING TRANSLATION FOR: '"+line+"'";
 		}
 		return translations.get(line);
 	}
