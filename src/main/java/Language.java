@@ -22,7 +22,7 @@ public class Language
 				String data = reader.nextLine();
 				try
 				{
-					translations.put(data.split(":")[0], data.split(":")[1].trim());
+					translations.put(data.split(";")[0], data.split(";")[1].trim());
 				}
 				catch (Exception e)
 				{
