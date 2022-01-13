@@ -11,7 +11,6 @@ import gui_fields.GUI_Player;
  */
 
 public class Player {
-
     private boolean inJail = false;
     private boolean jailCard = false;
     private int position = 0;
@@ -50,4 +49,6 @@ public class Player {
     public int getPosition() {return position;}
 
     public void setPosition(int position) {this.position = position;}
+
+    public String getName() {return name;}
 }
