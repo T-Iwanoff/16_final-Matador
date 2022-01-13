@@ -10,7 +10,11 @@ import gui_fields.GUI_Player;
 public class PlayerManager {
 
     /** initiation of Player class */
-    Player player = new Player();
+    private final Player player;
+
+    public PlayerManager(Player player) {
+        this.player = player;
+    }
 
     /** Player variables */
 
