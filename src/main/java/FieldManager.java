@@ -1,13 +1,13 @@
 import java.util.HashMap;
 
-public class FieldController {
+public class FieldManager {
 
     private HashMap<String, Integer> neighbourhoods = new HashMap<>();
     private Field[] fields;
 
     /** Constructor. Sets up the fields array and the neighbourhoods HashMap */
-    public FieldController() {
-        //Creates a field object corresponding to each field in the game
+    public FieldManager() {
+        //Creates a field object corresponding to each ownable field in the game
         fields = new Field[28];
         fields[0] = new Field(1,1200,1000,50,250,750,2250,4000,6000,"street","blue"); //Rødovrevej
         fields[1] = new Field(3,1200,1000,50,250,750,2250,4000,6000,"street","blue"); //Hvidovrevej
