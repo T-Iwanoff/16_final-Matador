@@ -6,20 +6,30 @@ import gui_fields.GUI_Street;
 
 public class Bank {
 
+    /** Instantiate other classes  */
+
+    FieldManager fm = new FieldManager();
+    PlayerManager pm = new PlayerManager();
+
+
+    /** Change player balance. */
+    public void changeBalance(int player, int amount) {
+            int playerBalance = pm.getBalance(player);
+            pm.setBalance(player,playerBalance + amount);
+
+    }
+
     /** Pays for the field. */
-    public void buyField() {
-        int fieldPrice = FieldManager.getPrice();
-        int playerBalance = PlayerManager.getBalance();
+    public void buyField(int field, int player) {
+        int fieldPrice = fm.getPrice(field);
+        fieldPrice = -fieldPrice;
 
-        int total = playerBalance - fieldPrice;
-
-        PlayerManager.setBalance(total);
+        fm.claimField(field, player);
+        changeBalance(player, fieldPrice);
     }
 
 
     /** Pay rent of the field to the owner. */
-
-    /** Change player balance. */
 
 
     /** return the sum of all players non-liquid assets. */
