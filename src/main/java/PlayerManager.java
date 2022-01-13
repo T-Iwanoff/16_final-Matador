@@ -1,42 +1,31 @@
 import java.util.HashMap;
 
-import gui_fields.GUI_Player;
-
-
 /**
  * The PlayerManager keep track of all players.
  */
 
 public class PlayerManager {
+    /** A HashMap containing player's ID and the corresponding player Object */
+    private HashMap<Integer,Player> players = new HashMap<>();
+    /** The number of players */
+    private int playerCount = 0;
 
-    /** initiation of Player class */
-    private final Player player;
-
-    public PlayerManager(Player player) {
-        this.player = player;
+    /** Creates a Player and adds them to the HashMap */
+    public void addPlayer(String name) { //Increases player count by 1 and adds it along with a new Player object to the HashMap
+        players.put(++playerCount,new Player(name));
     }
 
-    /** Player variables */
-
-
-    /** Creating a HashMap containing player's ID and the corresponding player name */
-    HashMap<Integer,String> players=new HashMap<Integer,String>();
-
-
-    /** Initializes a new player */
-
-    public void createPlayer(String name, int balance, getRandomCar()) {
-        GUI_Player GUIPlayer = new GUI_Player(name, startBalance,getRandomCar());
-        balance = new balance(GUIPlayer);
-        Player player = new Player(GUIPlayer);
-        GUIController.getInstance().addPlayer(GUIPlayer);
-        players.put();
+    /** Returns the names of all players */
+    public String[] listPlayers() {
+        String[] temp = new String[playerCount];
+        for (int i = 0; i < playerCount; i++) {
+            temp[i] = players.get(i).getName();
+        }
+        return temp;
     }
-
 
     /** get player count */
-    private final int playerCount = players.size();
-    public int getPlayerCount() {return playerCount;};
+    public int getPlayerCount() {return playerCount;}
 
 
 }
