@@ -12,7 +12,6 @@ import gui_fields.GUI_Player;
 
 public class Player {
 
-    private boolean playing = true;
     private boolean inJail = false;
     private boolean jailCard = false;
     private int position = 0;
@@ -39,7 +38,16 @@ public class Player {
     }
 
     public GUI_Player getGUIPlayer() {return GUIPlayer;}
-    public boolean getInJail() {return inJail;}
+
+    public boolean getJailStatus() {return inJail;}
+
+    public void setJailStatus(boolean inJail) {this.inJail = inJail;}
+
     public boolean getJailCard() {return jailCard;}
+
+    public void setJailCard(boolean jailCard) {this.jailCard = jailCard;}
+
     public int getPosition() {return position;}
+
+    public void setPosition(int position) {this.position = position;}
 }
