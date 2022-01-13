@@ -109,6 +109,11 @@ public class FieldManager {
         return fields[posToNum(field)].getRent(number);
     }
 
+    /** Returns the price of the field */
+    public int getPrice(int field) {
+        return fields[posToNum(field)].getPrice();
+    }
+
     /** Returns the amount of fields the player owns of a given type */
     public int getOwnedByType(String type, int player) {
         int temp = 0;
