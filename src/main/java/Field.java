@@ -25,6 +25,7 @@ public class Field {
         this.type = type;
         owner = 0;
         rent = new int[] {0, 100, 200};
+        houses = 0;
     }
 
     /** Constructor for ferries */
@@ -33,6 +34,7 @@ public class Field {
         price = 4000;
         this.type = type;
         owner = 0;
+        houses = 0;
         rent = new int[] {0, 500, 1000, 2000, 4000};
     }
 
