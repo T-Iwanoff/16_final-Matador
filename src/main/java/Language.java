@@ -44,7 +44,7 @@ public class Language
 	{
 		if (translations.isEmpty())
 		{
-			setLanguage("english");
+			setLanguage("dansk");
 		}
 		if (translations.get(line) == null)
 		{
