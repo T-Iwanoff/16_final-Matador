@@ -3,7 +3,7 @@ f1_title;Start
 f2_title;Rødovrevej
 f4_title;Hvidovrevej
 f5_title;Betal indkomst-\nskat
-f6_title;Helsingør - Helsingborg
+f6_title;Øresund
 f7_title;Roskildevej
 f9_title;Valby Langgade
 f10_title;Allégade
@@ -12,7 +12,7 @@ f12_title;Frederiksberg Allé
 f13_title;Tuborg
 f14_title;Bülowsvej
 f15_title;Gammel Kongevej
-f16_title;Mols-Linien
+f16_title;D.F.D.S.
 f17_title;Bernstorffsvej
 f19_title;Hellerupvej
 f20_title;Strandvejen
@@ -20,7 +20,7 @@ f21_title;Parkering
 f22_title;Trianglen
 f24_title;Østerbrogade
 f25_title;Grønningen
-f26_title;Gedser - Rostock
+f26_title;Ø.S.
 f27_title;Bredgade
 f28_title;Kgs. Nytorv
 f29_title;Carlsberg
@@ -29,7 +29,7 @@ f31_title;Gå i fængsel
 f32_title;Amagertorv
 f33_title;Vimmel-\nskaftet
 f35_title;Nygade
-f36_title;Rødby - Puttgarden
+f36_title;Bornholm
 f38_title;Frederiks-\nberggade
 f39_title;Ekstra-\nordinær\nstatsskat
 f40_title;Rådhus-\npladsen
@@ -73,7 +73,7 @@ f1_desc;Modtag kr. 4000,- når de passerer start
 f2_desc;Rødovrevej
 f4_desc;Hvidovrevej
 f5_desc;Betal indkomstskat 10% eller kr. 4000,-
-f6_desc;Helsingør - Helsingborg
+f6_desc;Øresundsredderiet
 f7_desc;Roskildevej
 f9_desc;Valby Langgade
 f10_desc;Allégade
@@ -82,7 +82,7 @@ f12_desc;Frederiksberg Allé
 f13_desc;Tuborg bryggeri
 f14_desc;Bülowsvej
 f15_desc;Gammel Kongevej
-f16_desc;Mols-Linien
+f16_desc;D.F.D.S.
 f17_desc;Bernstorffsvej
 f19_desc;Hellerupvej
 f20_desc;Strandvejen
@@ -90,7 +90,7 @@ f21_desc;Gratis parkering
 f22_desc;Trianglen
 f24_desc;Østerbrogade
 f25_desc;Grønningen
-f26_desc;Gedser - Rostock
+f26_desc;Ø.S. redderiet
 f27_desc;Bredgade
 f28_desc;Kongens Nytorv
 f29_desc;Carlsberg bryggeri
@@ -99,7 +99,7 @@ f31_desc;De fængsles. Slå to ens for at komme ud
 f32_desc;Amagertorv
 f33_desc;Vimmelskaftet
 f35_desc;Nygade
-f36_desc;Rødby - Puttgarden
+f36_desc;Bornholms redderi
 f38_desc;Frederiksberggade
 f39_desc;Betal ekstraordinær statsskat: kr. 2000,-
 f40_desc;Rådhuspladsen
