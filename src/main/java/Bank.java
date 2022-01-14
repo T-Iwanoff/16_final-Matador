@@ -134,4 +134,15 @@ public class Bank {
         pm.movePlayer(player,fields);
     }
 
+    /** Returns the owner of the field */
+    public int getFieldOwner(int field) {
+        return fm.getOwner(field);
+    }
+
+    /** Returns whether the field is owned */
+    public boolean isOwned(int field) {
+        return fm.isOwned(field);
+    }
+
+
 }
