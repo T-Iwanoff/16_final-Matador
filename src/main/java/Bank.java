@@ -3,10 +3,9 @@ public class Bank {
     /** Instantiate other classes  */
     FieldManager fm = new FieldManager();
     PlayerManager pm = new PlayerManager();
-    DiceCup dc = new DiceCup();
 
 
-    /** Change player balance. */
+    /** Changes the player's balance. */
     public void changeBalance(int player, int amount) {
             int playerBalance = pm.getBalance(player);
             pm.setBalance(player,playerBalance + amount);
@@ -30,32 +29,24 @@ public class Bank {
     }
 
     /** Pay rent of the field to the owner. */
-    public void payRent(int field, int player) {
+    public void payRent(int field, int player, int diceSum) {
         String fieldType = fm.getType(field);
         int payee = fm.getOwner(field);
         int number = fm.getOwnedByType(fieldType, player);
-        int diceSum = dc.getSum();
 
         switch (fieldType){
-
             case "street":
-                int stFieldRent = fm.getRent(field, number);
+                int stFieldRent = fm.getRent(field);
                 payTo(player, payee, stFieldRent);
                 break;
 
             case "ferry":
-                int frFieldRent;
-                if (number == 1){
-                    frFieldRent = 500;
-                }
-                else {
-                    frFieldRent = (number - 1) * 500 * 2;
-                }
+                int frFieldRent = fm.getRent(field, number);
                 payTo(player, payee, frFieldRent);
                 break;
 
             case "brewery":
-                int bwFieldRent = diceSum * (number * 100);
+                int bwFieldRent = diceSum * fm.getRent(field, number);
                 payTo(player, payee, bwFieldRent);
                 break;
         }
@@ -63,13 +54,13 @@ public class Bank {
 
 
     /** return the sum of all players non-liquid assets. */
-    public void sumAssets(int player) {
+    public int sumAssets(int player) {
         int sum = 0;
         int [] ownedFields = fm.getOwnedFields(player);
-
         for (int i : ownedFields){
-            sum =+ (int) (fm.getPrice(i)*0.5 + fm.getHouses(i) * fm.getHousePrice(i) * 0.5);
+            sum += (int) ((fm.getPrice(i) * 0.5) + (fm.getHouses(i) * fm.getHousePrice(i) * 0.5));
         }
+        return sum;
     }
 
 }
