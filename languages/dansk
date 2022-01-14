@@ -104,3 +104,13 @@ f38_desc;Frederiksberggade
 f39_desc;Betal ekstraordinær statsskat: kr. 2000,-
 f40_desc;Rådhuspladsen
 card_none;Der er ikke trukket nogen chancekort endnu
+lSelect;Vælg et sprog
+pSelect_num;Vælg antal spillere, mellem 3-6
+pSelect_numError;Der skal være mellem 3-6 spillere
+pSelect_name;Indtast navn på spiller
+pSelect_nameError;Navnet er allerede taget
+pChoice1.m;Har I lyst til at stoppe spillet?
+pChoice1.1;Fortsæt spillet
+pChoice1.2;Stop spillet
+endMessage;Spillet er slut!
+winner;har vundet spillet. Tillykke!
