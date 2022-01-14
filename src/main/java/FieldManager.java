@@ -95,6 +95,11 @@ public class FieldManager {
         return neighbourhoods.get(nbh);
     }
 
+    /** Returns the neighbourhood the field is in */
+    public String getNeighbourhood(int field) {
+        return fields[posToNum(field)].getNeighbourhood();
+    }
+
     /** Marks the player as the owner of the field */
     public void claimField(int field, int player) {
         fields[posToNum(field)].setOwner(player);

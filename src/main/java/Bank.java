@@ -37,6 +37,9 @@ public class Bank {
         switch (fieldType){
             case "street":
                 int stFieldRent = fm.getRent(field);
+                if (fm.getOwner(field) == fm.getOwner(fm.getNeighbourhood(field))) {
+                    stFieldRent = stFieldRent*2;
+                }
                 payTo(player, payee, stFieldRent);
                 break;
 
@@ -53,7 +56,7 @@ public class Bank {
     }
 
 
-    /** return the sum of all players non-liquid assets. */
+    /** Returns the sum of all players non-liquid assets. */
     public int sumAssets(int player) {
         int sum = 0;
         int [] ownedFields = fm.getOwnedFields(player);
@@ -62,5 +65,68 @@ public class Bank {
         }
         return sum;
     }
+
+    /** Checks whether anybody has lost */
+    public boolean checkLoser() {
+        for (int i = 1; i <= pm.getPlayerCount(); i++) {
+            if ( (pm.getBalance(i) <= 0) && ((pm.getBalance(i)+sumAssets(i)) <= 0) ) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** Adds a player */
+    public void addPlayer(String name) {
+        pm.addPlayer(name);
+    }
+
+    /** Returns the amount of players in the game */
+    public int getPlayerCount() {
+        return pm.getPlayerCount();
+    }
+
+    /** Returns the balance of the player */
+    public int getPlayerBalance(int player) {
+        return pm.getBalance(player);
+    }
+
+    /** Returns the position of the player */
+    public int getPlayerPosition(int player) {
+        return pm.getPosition(player);
+    }
+
+    /** Sets the position of the player */
+    public void setPlayerPosition(int player, int position) {
+        pm.setPosition(player, position);
+    }
+
+    /** Returns the name the player */
+    public String getPlayerName(int player) {
+        return pm.getName(player);
+    }
+
+    /** Sets whether the player is in jail */
+    public void setJailStatus(int player, boolean status) {
+        pm.setJailStatus(player, status);
+    }
+
+    /** Returns whether the player is in jail */
+    public boolean getJailStatus(int player) {
+        return pm.isJailed(player);
+    }
+
+    /** Sets whether the player has a 'get out of jail' card */
+    public void setJailCard(int player, boolean card) {
+        pm.setJailCard(player,card);
+    }
+
+    /** Returns whether the player has a 'get out of jail' card */
+    public boolean getJailCard(int player) {
+        return pm.hasJailCard(player);
+    }
+
+    /** Moves the player a given distance */
+    public void movePlayer(int player, int fields) {}
 
 }

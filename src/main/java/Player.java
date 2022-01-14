@@ -19,7 +19,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
-        GUIPlayer = new GUI_Player(name, 0, getRandomCar());
+        GUIPlayer = new GUI_Player(name, 30000, getRandomCar());
         GUICreator.getInstance().addPlayer(GUIPlayer);
         GUICreator.getInstance().getFields()[position].setCar(GUIPlayer,true);
     }
