@@ -21,6 +21,7 @@ public class Player {
         this.name = name;
         GUIPlayer = new GUI_Player(name, 0, getRandomCar());
         GUICreator.getInstance().addPlayer(GUIPlayer);
+        GUICreator.getInstance().getFields()[position].setCar(GUIPlayer,true);
     }
 
     /** Creates a randomized game piece */
