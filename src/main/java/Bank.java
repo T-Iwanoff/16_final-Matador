@@ -1,3 +1,4 @@
+import gui_fields.GUI_Street;
 
 /** Changes the balance of the player */
 
@@ -66,6 +67,13 @@ public class Bank {
 
 
     /** return the sum of all players non-liquid assets. */
+    public void sumAssets(int player) {
+        int sum = 0;
+        int [] ownedFields = fm.getOwnedFields(player);
 
+        for (int i : ownedFields){
+            sum = (int) (+ fm.getPrice(i)*0.5 + fm.getHouses(i) * fm.getHousePrice(i) * 0.5);
+        }
+    }
 
 }
