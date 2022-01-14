@@ -138,7 +138,34 @@ public class GameController {
     }
 
     /** Executes an action based on which field the player landed on */
-    private void fieldAction(int player, int position) {}
+    private void fieldAction(int player, int field) {
+        String fieldType = GUICreator.getInstance().getFields()[field].getClass().getSimpleName();
+        switch (fieldType) {
+            case "GUI_Street":
+                //streetAction(player, field);
+                break;
+            case "GUI_Chance":
+                //chanceAction(player);
+                break;
+            case "GUI_Tax":
+                //taxAction(player, field);
+                break;
+            case "GUI_Brewery":
+                //breweryAction(player);
+                break;
+            case "GUI_Shipping":
+                //shippingAction(player);
+                break;
+            case "GUI_Jail":
+                //jailAction(player, field);
+            case "GUI_Start":
+            case "GUI_Refuge":
+                break;
+        }
+    }
+
+    /** Forces the player to sell their fields or houses until they have a positive balance */
+    private void forceSale(int player) {}
 
     /** Handles letting the player choose between buying, selling and ending their turn */
     private void turnMenu(int player) {}
