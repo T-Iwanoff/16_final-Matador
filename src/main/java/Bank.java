@@ -127,6 +127,8 @@ public class Bank {
     }
 
     /** Moves the player a given distance */
-    public void movePlayer(int player, int fields) {}
+    public void movePlayer(int player, int fields) {
+        pm.movePlayer(player,fields);
+    }
 
 }

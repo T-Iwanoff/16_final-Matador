@@ -55,4 +55,7 @@ public class PlayerManager {
 
     /** Sets the player's balance */
     public void setBalance(int ID, int bal) {players.get(ID).getGUIPlayer().setBalance(bal);}
+
+    /** Moves the player a given distance */
+    public void movePlayer(int ID, int fields) {players.get(ID).movePlayer(fields);}
 }

@@ -17,6 +17,7 @@ public class Player {
     private GUI_Player GUIPlayer;
     private String name;
 
+    /** Constructor */
     public Player(String name) {
         this.name = name;
         GUIPlayer = new GUI_Player(name, 30000, getRandomCar());
@@ -38,19 +39,30 @@ public class Player {
                 Color.white, types[(int) (Math.random() * 4)], Pattern.FILL);
     }
 
+    /** Moves the player a given distance */
+    public void movePlayer(int fields) {}
+
+    /** Returns the GUI_Player */
     public GUI_Player getGUIPlayer() {return GUIPlayer;}
 
+    /** Returns whether the player is jailed */
     public boolean getJailStatus() {return inJail;}
 
+    /** Sets whether the player is jailed */
     public void setJailStatus(boolean inJail) {this.inJail = inJail;}
 
+    /** Returns whether the player has a 'get out of jail' card */
     public boolean getJailCard() {return jailCard;}
 
+    /** Sets whether the player has a 'get out of jail' card */
     public void setJailCard(boolean jailCard) {this.jailCard = jailCard;}
 
+    /** Returns the player's position */
     public int getPosition() {return position;}
 
+    /** Sets the player's position */
     public void setPosition(int position) {this.position = position;}
 
+    /** Returns the player's name */
     public String getName() {return name;}
 }
