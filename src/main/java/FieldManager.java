@@ -59,6 +59,22 @@ public class FieldManager {
         return temp;
     }
 
+    /** Returns a list of all the fields owned by the player */
+    public int[] getOwnedFields(int player) {
+        int owned = 0;
+        for (Field i : fields) {
+            if (i.getOwner() == player) {owned++;}
+        }
+        int[] ownedFields = new int[owned];
+        int temp = 0;
+        for (Field i : fields) {
+            if (i.getOwner() == player) {
+                ownedFields[temp++] = i.getPosition();
+            }
+        }
+        return ownedFields;
+    }
+
     /** Returns whether a field is owned by a player */
     public boolean isOwned(int field) {
         return (fields[posToNum(field)].getOwner() == 0);
