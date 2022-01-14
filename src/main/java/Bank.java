@@ -1,7 +1,3 @@
-import gui_fields.GUI_Street;
-
-/** Changes the balance of the player */
-
 public class Bank {
 
     /** Instantiate other classes  */
@@ -72,7 +68,7 @@ public class Bank {
         int [] ownedFields = fm.getOwnedFields(player);
 
         for (int i : ownedFields){
-            sum = (int) (+ fm.getPrice(i)*0.5 + fm.getHouses(i) * fm.getHousePrice(i) * 0.5);
+            sum =+ (int) (fm.getPrice(i)*0.5 + fm.getHouses(i) * fm.getHousePrice(i) * 0.5);
         }
     }
 
