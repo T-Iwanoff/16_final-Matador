@@ -2,6 +2,7 @@ import java.awt.Color;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Car.Pattern;
 import gui_fields.GUI_Car.Type;
+import gui_fields.GUI_Field;
 import gui_fields.GUI_Player;
 
 /**
@@ -40,7 +41,21 @@ public class Player {
     }
 
     /** Moves the player a given distance */
-    public void movePlayer(int fields) {}
+    public void movePlayer(int fields) {
+        GUI_Field[] guiFields = GUICreator.getInstance().getFields();
+        for (int i = 0; i < fields; i++) {
+            guiFields[position].setCar(GUIPlayer, false);
+            position++;
+            if (position == guiFields.length) {
+                position = 0;
+            }
+            guiFields[position].setCar(GUIPlayer, true);
+            try {
+                Thread.sleep(250L);
+            }
+            catch (Exception e) {}
+        }
+    }
 
     /** Returns the GUI_Player */
     public GUI_Player getGUIPlayer() {return GUIPlayer;}

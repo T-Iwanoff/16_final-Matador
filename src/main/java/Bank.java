@@ -5,7 +5,7 @@ public class Bank {
     PlayerManager pm = new PlayerManager();
 
 
-    /** Changes the player's balance. */
+    /** Adds an amount to the player's balance. */
     public void changeBalance(int player, int amount) {
             int playerBalance = pm.getBalance(player);
             pm.setBalance(player,playerBalance + amount);
@@ -128,6 +128,9 @@ public class Bank {
 
     /** Moves the player a given distance */
     public void movePlayer(int player, int fields) {
+        if ((fields+pm.getPosition(player)) >= 40) {
+            changeBalance(player,4000);
+        }
         pm.movePlayer(player,fields);
     }
 
