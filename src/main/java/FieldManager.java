@@ -138,4 +138,6 @@ public class FieldManager {
         return temp;
     }
 
+    /** Returns the field type */
+    public String getType(int field) {return fields[posToNum(field)].getType();}
 }
