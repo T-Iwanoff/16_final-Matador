@@ -112,5 +112,22 @@ pSelect_nameError;Navnet er allerede taget
 pChoice1.m;Har I lyst til at stoppe spillet?
 pChoice1.1;Fortsæt spillet
 pChoice1.2;Stop spillet
+pChoice2.m1;Du er i fængsel,
+pChoice2.m2;. Har du lyst til at slå for at komme ud, eller betale?
+pChoice2.1;Betal 1000,-
+pChoice2.2;Slå med terninger
+pChoice2.1m;Du har valgt at betale 1000,- for at forlade fængslet. Kast terningerne
+pChoice2.2m;Du har valgt at spille for din frihed! Kast terningerne
+prisonCardOut1;Det er din tur,
+prisonCardOut2;.\nDu er i fængsel men har et frisættelseskort. Du bliver øjeblikkeligt løsladt. Kast terningerne
+prisonRoll1;Tillykke, du er løsladt
+prisonRoll2;Beklager, prøv igen
+prisonRoll3;Beklager, du kom ikke ud. Bedre held næste gang
+turnMsg1;Det er din tur,
+turnMsg2;. Kast terningerne
+rolledpair;Tillykke! Du slog to ens. Du får en ekstra tur
+rolled3pairs;Desvære! Dette er tredje gang du har slået to ens. Gå i fængsel
+landOnStart;Du er landet på start. Du får 4000kr af banken
+landOnRefuge;Du er landet på parkeringspladsen. Der sker ikke noget.
 endMessage;Spillet er slut!
 winner;har vundet spillet. Tillykke!
