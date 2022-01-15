@@ -149,4 +149,23 @@ public class Bank {
         return fm.getPrice(field);
     }
 
+    /** Lists all fields owned by the player */
+    public int[] getOwnedFields(int player) {
+        return fm.getOwnedFields(player);
+    }
+
+    /** Returns the neighbourhood of the field */
+    public String getNeighbourhood(int field) {
+        return fm.getNeighbourhood(field);
+    }
+
+    /** Returns whether the neighbour is owned by a player */
+    public boolean checkNeighbourhood(String nbh, int player) {
+        return fm.checkNeighbourhood(nbh,player);
+    }
+
+    /** Marks the player as the owner of a neighbourhood */
+    public void claimNeighbourhood(String nbh, int player) {
+        fm.claimNeighbourhood(nbh, player);
+    }
 }

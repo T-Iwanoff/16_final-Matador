@@ -119,6 +119,8 @@ public class GameController {
 
     /** Plays a turn */
     private void playTurn(int player) {
+        //Makes the center show the player's owned fields
+        listFields(player);
         //Redirects the game if the player starts their turn in jail
         if (bank.getJailStatus(player)) {
             playerJailed(player);
@@ -132,6 +134,7 @@ public class GameController {
             GUICreator.getInstance().showMessage(Language.getLine("turnMsg1")+" "+
                             bank.getPlayerName(player)+Language.getLine("turnMsg2"));
             dc.rollDice();
+            GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
             }
         //Gives the player an extra turn if they rolled a pair
         if (dc.isPair()) {
@@ -160,6 +163,8 @@ public class GameController {
         if (bank.getJailStatus(player)) {
             return;
         }
+        //Updates the player's owned fields
+        listFields(player);
         //Checks whether the player needs to sell something to avoid going bankrupt
         if (bank.getPlayerBalance(player) <= 0) {
             forceSale(player);
@@ -177,6 +182,7 @@ public class GameController {
             GUICreator.getInstance().showMessage(Language.getLine("prisonCardOut1")+" "+
                     bank.getPlayerName(player)+Language.getLine("prisonCardOut2"));
             dc.rollDice();
+            GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
             return;
         }
         //Otherwise, the player is asked to pay or roll their way out
@@ -189,6 +195,7 @@ public class GameController {
             bank.setJailStatus(player,false);
             GUICreator.getInstance().showMessage(Language.getLine("pChoice2.1m"));
             dc.rollDice();
+            GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
             return;
         }
         //If the player chose to roll for freedom
@@ -196,6 +203,7 @@ public class GameController {
             GUICreator.getInstance().showMessage(Language.getLine("pChoice2.2m"));
             for (int i=0; i<3; i++) {
                 dc.rollDice();
+                GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
                 if (dc.isPair()) {
                     bank.setJailStatus(player,false);
                     GUICreator.getInstance().showMessage(Language.getLine("prisonRoll1"));
@@ -260,6 +268,10 @@ public class GameController {
             if (button.equals(Language.getLine("pChoice3.1"))) {
                 bank.buyField(field,player);
                 GUI.showMessage(Language.getLine("pChoice3.1m")+" "+Language.getLine("f"+(field+1)+"_title"));
+                //Checks whether the player now owns all fields in the neighbourhood
+                if (bank.checkNeighbourhood(bank.getNeighbourhood(field),player)) {
+                    bank.claimNeighbourhood(bank.getNeighbourhood(field),player);
+                }
             }
         }
     }
@@ -306,6 +318,22 @@ public class GameController {
                 bank.setPlayerPosition(player,10);
                 bank.setJailStatus(player,true);
         }
+    }
+
+    /** Lists all fields owned by the player in the center */
+    private void listFields(int player) {
+        int[] pos = bank.getOwnedFields(player);
+        String fieldList = "";
+        //If the player owns any fields, add the first to the list
+        if (pos.length>0) {
+            fieldList = Language.getLine("f" + (pos[0] + 1) + "_title");
+        }
+        //For each field after the first, make a comma and add another to the list
+        for (int i=1; i<pos.length; i++) {
+            fieldList += ", "+Language.getLine("f"+(pos[i]+1)+"_title");
+        }
+        //Display the list in the center of the screen
+        GUICreator.getInstance().setChanceCard(Language.getLine("showFields")+" "+fieldList);
     }
 
     /** Forces the player to sell their fields or houses until they have a positive balance */
