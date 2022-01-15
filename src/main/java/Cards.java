@@ -7,4 +7,14 @@ public class Cards {
         this.action = act;
         this.value = val;
     }
+
+    public int getID() {
+        return identification;
+    }
+    public int getAction() {
+        return action;
+    }
+    public int getValue() {
+        return value;
+    }
 }

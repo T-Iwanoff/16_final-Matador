@@ -8,6 +8,7 @@ public class Deck {
     private Random randNum = new Random(); //random number generator
     private Set<Integer>set = new LinkedHashSet<Integer>(); //random number container
     private Integer[] randomArray = {}; //random number array
+    private int cardsSum = cards.length; //amount of chance cards in total
 
 
     /** Constructor. Sets up the cards array */
@@ -65,10 +66,9 @@ public class Deck {
 
     /** create array with random card order*/
     public void createDeck(){
-        while (set.size() < 45) {
-            set.add(randNum.nextInt(45)+1);
+        while (set.size() < cardsSum) {
+            set.add(randNum.nextInt(cardsSum)+1);
         }
-
         Integer[] randomArray = new Integer[set.size()];
         randomArray = set.toArray(randomArray);
 }
@@ -76,31 +76,44 @@ public class Deck {
     /** reshuffle the deck*/
     private void reShuffle(){
         set.clear();
-        while (set.size() < 45) {
-            set.add(randNum.nextInt(45)+1);
+        while (set.size() < cardsSum) {
+            set.add(randNum.nextInt(cardsSum)+1);
         }
         randomArray = set.toArray(randomArray);
     }
 
-    /** draw the top card of the deck and get the ID*/
+    /** get action of the card*/
+    public int getAction() {
+        return cards[drawCard()].getAction();
+    }
+
+    /** get value of the card*/
+    public int getValue() {
+        return cards[drawCard()].getValue();
+    }
+
+    /** get ID of the card*/
+    public int getID() {
+        return cards[drawCard()].getID();
+    }
+
+    /** draw the top card of the deck and get the Cards index for the cards array*/
     public int drawCard(){
         int cardsLeft = set.size();
-        int ID = -1;
+        int currentCard = -1;
 
         if (cardsLeft > 0){
-            ++ID;
+            ++currentCard;
             --cardsLeft;
-
-            return ID;
+            return currentCard;
         }
         else{
             reShuffle();
             cardsLeft = set.size();
-            ID = -1;
-            ++ID;
+            currentCard = -1;
+            ++currentCard;
             --cardsLeft;
-
-            return ID;
+            return currentCard;
         }
     }
 
