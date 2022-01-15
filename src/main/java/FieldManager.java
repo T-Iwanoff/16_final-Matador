@@ -77,12 +77,12 @@ public class FieldManager {
 
     /** Returns whether a field is owned by a player */
     public boolean isOwned(int field) {
-        return (fields[posToNum(field)].getOwner() == 0);
+        return (fields[posToNum(field)].getOwner() != 0);
     }
 
     /** Returns whether a neighbourhood is owned by a player */
     public boolean isOwned(String nbh) {
-        return (neighbourhoods.get(nbh) == 0);
+        return (neighbourhoods.get(nbh) != 0);
     }
 
     /** Returns the ID of the player that owns the field. Returns 0 if unowned */
@@ -155,7 +155,7 @@ public class FieldManager {
     public boolean checkNeighbourhood(String nbh, int player) {
         boolean temp = true;
         for (Field i : fields) {
-            if (i.getNeighbourhood() == nbh) {
+            if (i.getNeighbourhood().equals(nbh)) {
                 if (i.getOwner() != player) {
                     temp = false;
                 }

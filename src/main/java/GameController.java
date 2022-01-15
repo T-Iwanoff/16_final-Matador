@@ -166,7 +166,7 @@ public class GameController {
         //Updates the player's owned fields
         listFields(player);
         //Checks whether the player needs to sell something to avoid going bankrupt
-        if (bank.getPlayerBalance(player) <= 0) {
+        if (bank.getPlayerBalance(player) < 0) {
             forceSale(player);
         }
         //Gives the player the option to buy and sell fields and houses or end their turn
@@ -188,7 +188,7 @@ public class GameController {
         //Otherwise, the player is asked to pay or roll their way out
         String button = GUICreator.getInstance().getUserButtonPressed(
                 Language.getLine("pChoice2.m1")+" "+bank.getPlayerName(player)+Language.getLine("pChoice2.m2"),
-                Language.getLine("pChoice2.1"),Language.getLine("pChoice2.1"));
+                Language.getLine("pChoice2.1"),Language.getLine("pChoice2.2"));
         //If the player chose pay
         if (button.equals(Language.getLine("pChoice2.1"))) {
             bank.changeBalance(player,-1000);
@@ -249,9 +249,15 @@ public class GameController {
         GUI GUI = GUICreator.getInstance();
         //Checks if the field is owned
         if (bank.isOwned(field)) {
-            GUI.showMessage(Language.getLine("landOn")+" "+Language.getLine("f"+(field+1)+"_title")+Language.getLine("landOnOwned"));
-            //Pay rent
-            bank.payRent(field,player,dc.getSum());
+            //Checks if the player owns the field themself
+            if (bank.getFieldOwner(field) == player) {
+                GUI.showMessage(Language.getLine("landOn") + " " + Language.getLine("f" + (field + 1) + "_title") + Language.getLine("landOnOwn"));
+            }
+            else {
+                //Pay rent
+                GUI.showMessage(Language.getLine("landOn") + " " + Language.getLine("f" + (field + 1) + "_title") + Language.getLine("landOnOwned"));
+                bank.payRent(field, player, dc.getSum());
+            }
         }
         else {
             //Checks if the player can afford the field

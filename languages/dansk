@@ -134,6 +134,7 @@ rolled3pairs;Desvære! Dette er tredje gang du har slået to ens. Gå i fængsel
 landOnStart;Du er landet på start. Du får 4000kr af banken
 landOnRefuge;Du holder pause på parkeringspladsen
 landOn;Du er landet på
+landOnOwn;. Du ejer allerede feltet
 landOnOwned;. Da feltet allerede er ejet, skal du betale leje
 landOnUnowned;. Du har ikke råd til feltet
 landOnTax10;Betal 10%
