@@ -166,4 +166,32 @@ public class FieldManager {
 
     /** Returns the field type */
     public String getType(int field) {return fields[posToNum(field)].getType();}
+
+    /** Returns whether the field is ready for development */
+    public boolean isBuildable(int field) {
+        //Checks whether the correct neighbourhood is owned
+        if (!isOwned(getNeighbourhood(field))) {return false;}
+        int houses = getHouses(field);
+        //Checks whether the field is already full
+        if (houses == 5) {return false;}
+        //Checks whether the rest of the fields in the neighbourhood has at least as many houses
+        for (Field i : fields) {
+            if (i.getNeighbourhood().equals(getNeighbourhood(field))) {
+                if (houses > i.getHouses()) {
+                    return false;
+                }
+            }
+        }
+        //If it passes all the checks, the field is ready for development
+        return true;
+    }
+
+    /** Returns how many of the listed fields the player can build on */
+    public int getBuildables(int[] fields) {
+        int buildable = 0;
+        for (int i : fields) {
+            if (isBuildable(i)) {buildable++;}
+        }
+        return buildable;
+    }
 }

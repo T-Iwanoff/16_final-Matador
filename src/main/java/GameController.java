@@ -2,6 +2,7 @@ import gui_fields.GUI_Field;
 import gui_main.GUI;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class GameController {
     Bank bank = new Bank();
@@ -10,12 +11,16 @@ public class GameController {
     int playerTurn = 0;
     int pairsRolled = 0;
 
-    /** Constructor */
+    /**
+     * Constructor
+     */
     public GameController() {
         runGame();
     }
 
-    /** Runs the game */
+    /**
+     * Runs the game
+     */
     public void runGame() {
         //Sets up the game
         startGame();
@@ -24,17 +29,21 @@ public class GameController {
             playRound();
         } while (!gameEnd);
         //Announces the winner then closes the GUI
-        GUICreator.getInstance().showMessage(Language.getLine("endMessage")+"\n"+getWinner()+" "+Language.getLine("winner"));
+        GUICreator.getInstance().showMessage(Language.getLine("endMessage") + "\n" + getWinner() + " " + Language.getLine("winner"));
         GUICreator.getInstance().close();
     }
 
-    /** Sets up the game */
+    /**
+     * Sets up the game
+     */
     private void startGame() {
         setLanguage();
         registerPlayers();
     }
 
-    /** Lets the user input the players' names and sets up the players */
+    /**
+     * Lets the user input the players' names and sets up the players
+     */
     private void registerPlayers() {
         GUI GUI = GUICreator.getInstance();
         //Lets the users input the number of players
@@ -54,17 +63,19 @@ public class GameController {
             String name;
             //Repeats whenever a name is already taken
             do {
-                name = GUI.getUserString(Language.getLine("pSelect_name")+" "+(i + 1));
-                if (checkListMatch(names,name)) {
+                name = GUI.getUserString(Language.getLine("pSelect_name") + " " + (i + 1));
+                if (checkListMatch(names, name)) {
                     GUI.showMessage(Language.getLine("pSelect_nameError"));
                 }
-            } while (checkListMatch(names,name));
+            } while (checkListMatch(names, name));
             bank.addPlayer(name);
             names[i] = name;
         }
     }
 
-    /** Returns whether a String is present in a String array */
+    /**
+     * Returns whether a String is present in a String array
+     */
     private boolean checkListMatch(String[] array, String string) {
         boolean temp = false;
         for (String i : array) {
@@ -77,10 +88,12 @@ public class GameController {
         return temp;
     }
 
-    /** Opens a new window to let the user select a language */
+    /**
+     * Opens a new window to let the user select a language
+     */
     private void setLanguage() {
         //Opens an empty GUI
-        GUI chooseLanguage = new GUI(new GUI_Field[0],new Color(51, 204, 0));
+        GUI chooseLanguage = new GUI(new GUI_Field[0], new Color(51, 204, 0));
         //Creates a drop-down menu for selecting language
         String[] languages = Language.getLanguages();
         Language.setLanguage(chooseLanguage.getUserSelection(Language.getLine("lSelect"), languages));
@@ -88,12 +101,14 @@ public class GameController {
         chooseLanguage.close();
     }
 
-    /** Returns the name of the player with the most assets */
+    /**
+     * Returns the name of the player with the most assets
+     */
     private String getWinner() {
         int winner = 0, sum = 0;
         //Goes through all the players, checks whether their wealth is higher than the current frontrunner
-        for (int i = 1; i<=bank.getPlayerCount(); i++) {
-            int tempSum = bank.sumAssets(i)+bank.getPlayerBalance(i);
+        for (int i = 1; i <= bank.getPlayerCount(); i++) {
+            int tempSum = bank.sumAssets(i) + bank.getPlayerBalance(i);
             if (sum < tempSum) {
                 winner = i;
                 sum = tempSum;
@@ -102,22 +117,30 @@ public class GameController {
         return bank.getPlayerName(winner);
     }
 
-    /** Plays a round */
+    /**
+     * Plays a round
+     */
     private void playRound() {
         //Makes each player take a turn, unless anyone has lost
-        for (playerTurn = 1; playerTurn<=bank.getPlayerCount(); playerTurn++) {
-            if (gameEnd) {return;}
+        for (playerTurn = 1; playerTurn <= bank.getPlayerCount(); playerTurn++) {
+            if (gameEnd) {
+                return;
+            }
             playTurn(playerTurn);
         }
         //Gives the users the choice to end the game
         if (!gameEnd) {
             String button = GUICreator.getInstance().getUserButtonPressed(Language.getLine("pChoice1.m"),
-                            Language.getLine("pChoice1.1"),Language.getLine("pChoice1.2"));
-            if (button.equals(Language.getLine("pChoice1.2"))) {gameEnd = true;}
+                    Language.getLine("pChoice1.1"), Language.getLine("pChoice1.2"));
+            if (button.equals(Language.getLine("pChoice1.2"))) {
+                gameEnd = true;
+            }
         }
     }
 
-    /** Plays a turn */
+    /**
+     * Plays a turn
+     */
     private void playTurn(int player) {
         //Makes the center show the player's owned fields
         listFields(player);
@@ -131,11 +154,11 @@ public class GameController {
         }
         //If the player wasn't jailed, has them roll the dice
         else {
-            GUICreator.getInstance().showMessage(Language.getLine("turnMsg1")+" "+
-                            bank.getPlayerName(player)+Language.getLine("turnMsg2"));
+            GUICreator.getInstance().showMessage(Language.getLine("turnMsg1") + " " +
+                    bank.getPlayerName(player) + Language.getLine("turnMsg2"));
             dc.rollDice();
-            GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
-            }
+            GUICreator.getInstance().setDice(dc.getFaces()[0], dc.getFaces()[1]);
+        }
         //Gives the player an extra turn if they rolled a pair
         if (dc.isPair()) {
             //If they have rolled a pair 3 times, they get jailed
@@ -150,10 +173,12 @@ public class GameController {
             GUICreator.getInstance().showMessage(Language.getLine("rolledpair"));
         }
         //If they didn't roll a pair, resets pair counter
-        else {pairsRolled = 0;}
+        else {
+            pairsRolled = 0;
+        }
         //Moves the player to forward and simulates them landing on a field
-        bank.movePlayer(player,dc.getSum());
-        fieldAction(player,bank.getPlayerPosition(player));
+        bank.movePlayer(player, dc.getSum());
+        fieldAction(player, bank.getPlayerPosition(player));
         //Checks whether anyone has lost
         if (bank.checkLoser()) {
             gameEnd = true;
@@ -173,50 +198,55 @@ public class GameController {
         turnMenu(player);
     }
 
-    /** Goes through the player's options if they are jailed */
+    /**
+     * Goes through the player's options if they are jailed
+     */
     private void playerJailed(int player) {
         //If the player has a 'get out of jail' card
         if (bank.getJailCard(player)) {
-            bank.setJailCard(player,false);
-            bank.setJailStatus(player,false);
-            GUICreator.getInstance().showMessage(Language.getLine("prisonCardOut1")+" "+
-                    bank.getPlayerName(player)+Language.getLine("prisonCardOut2"));
+            bank.setJailCard(player, false);
+            bank.setJailStatus(player, false);
+            GUICreator.getInstance().showMessage(Language.getLine("prisonCardOut1") + " " +
+                    bank.getPlayerName(player) + Language.getLine("prisonCardOut2"));
             dc.rollDice();
-            GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
+            GUICreator.getInstance().setDice(dc.getFaces()[0], dc.getFaces()[1]);
             return;
         }
         //Otherwise, the player is asked to pay or roll their way out
         String button = GUICreator.getInstance().getUserButtonPressed(
-                Language.getLine("pChoice2.m1")+" "+bank.getPlayerName(player)+Language.getLine("pChoice2.m2"),
-                Language.getLine("pChoice2.1"),Language.getLine("pChoice2.2"));
+                Language.getLine("pChoice2.m1") + " " + bank.getPlayerName(player) + Language.getLine("pChoice2.m2"),
+                Language.getLine("pChoice2.1"), Language.getLine("pChoice2.2"));
         //If the player chose pay
         if (button.equals(Language.getLine("pChoice2.1"))) {
-            bank.changeBalance(player,-1000);
-            bank.setJailStatus(player,false);
+            bank.changeBalance(player, -1000);
+            bank.setJailStatus(player, false);
             GUICreator.getInstance().showMessage(Language.getLine("pChoice2.1m"));
             dc.rollDice();
-            GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
+            GUICreator.getInstance().setDice(dc.getFaces()[0], dc.getFaces()[1]);
             return;
         }
         //If the player chose to roll for freedom
         if (button.equals(Language.getLine("pChoice2.2"))) {
             GUICreator.getInstance().showMessage(Language.getLine("pChoice2.2m"));
-            for (int i=0; i<3; i++) {
+            for (int i = 0; i < 3; i++) {
                 dc.rollDice();
-                GUICreator.getInstance().setDice(dc.getFaces()[0],dc.getFaces()[1]);
+                GUICreator.getInstance().setDice(dc.getFaces()[0], dc.getFaces()[1]);
                 if (dc.isPair()) {
-                    bank.setJailStatus(player,false);
+                    bank.setJailStatus(player, false);
                     GUICreator.getInstance().showMessage(Language.getLine("prisonRoll1"));
                     break;
+                } else if (i < 2) {
+                    GUICreator.getInstance().showMessage(Language.getLine("prisonRoll2"));
                 }
-                else if (i<2) {GUICreator.getInstance().showMessage(Language.getLine("prisonRoll2"));}
             }
             //If the player failed to get out
             GUICreator.getInstance().showMessage(Language.getLine("prisonRoll3"));
         }
     }
 
-    /** Executes an action based on which field the player landed on */
+    /**
+     * Executes an action based on which field the player landed on
+     */
     private void fieldAction(int player, int field) { //
         //Checks which field type the player landed on and redirects them
         String fieldType = GUICreator.getInstance().getFields()[field].getClass().getSimpleName();
@@ -244,55 +274,57 @@ public class GameController {
         }
     }
 
-    /** Executes landing on a street */
+    /**
+     * Executes landing on a street
+     */
     private void ownableAction(int player, int field) {
         GUI GUI = GUICreator.getInstance();
         //Checks if the field is owned
         if (bank.isOwned(field)) {
             //Checks if the player owns the field themself
             if (bank.getFieldOwner(field) == player) {
-                GUI.showMessage(Language.getLine("landOn") + " " + Language.getLine("f" + (field + 1) + "_title") + Language.getLine("landOnOwn"));
-            }
-            else {
+                GUI.showMessage(Language.getLine("landOn") + " " + getFieldName(field) + Language.getLine("landOnOwn"));
+            } else {
                 //Pay rent
-                GUI.showMessage(Language.getLine("landOn") + " " + Language.getLine("f" + (field + 1) + "_title") + Language.getLine("landOnOwned"));
+                GUI.showMessage(Language.getLine("landOn") + " " + getFieldName(field) + Language.getLine("landOnOwned"));
                 bank.payRent(field, player, dc.getSum());
             }
-        }
-        else {
+        } else {
             //Checks if the player can afford the field
-            if (bank.getPlayerBalance(player)<bank.getFieldPrice(field)) {
-                GUI.showMessage(Language.getLine("landOn") + " " + Language.getLine("f" + (field + 1) + "_title")
+            if (bank.getPlayerBalance(player) < bank.getFieldPrice(field)) {
+                GUI.showMessage(Language.getLine("landOn") + " " + getFieldName(field)
                         + Language.getLine("landOnUnowned"));
                 return;
             }
             //Offers for the player to buy the field
-            String button = GUI.getUserButtonPressed(Language.getLine("landOn")+" "
-                            +Language.getLine("f"+(field+1)+"_title")+Language.getLine("pChoice3.m"),
-                            Language.getLine("pChoice3.1"), Language.getLine("pChoice3.2"));
+            String button = GUI.getUserButtonPressed(Language.getLine("landOn") + " "
+                            + getFieldName(field) + Language.getLine("pChoice3.m"),
+                    Language.getLine("pChoice3.1"), Language.getLine("pChoice3.2"));
             //If the player chose to buy it
             if (button.equals(Language.getLine("pChoice3.1"))) {
-                bank.buyField(field,player);
-                GUI.showMessage(Language.getLine("pChoice3.1m")+" "+Language.getLine("f"+(field+1)+"_title"));
+                bank.buyField(field, player);
+                GUI.showMessage(Language.getLine("pChoice3.1m") + " " + getFieldName(field));
                 //Checks whether the player now owns all fields in the neighbourhood
-                if (bank.checkNeighbourhood(bank.getNeighbourhood(field),player)) {
-                    bank.claimNeighbourhood(bank.getNeighbourhood(field),player);
+                if (bank.checkNeighbourhood(bank.getNeighbourhood(field), player)) {
+                    bank.claimNeighbourhood(bank.getNeighbourhood(field), player);
                 }
             }
         }
     }
 
-    /** Executes landing on a tax field */
+    /**
+     * Executes landing on a tax field
+     */
     private void taxAction(int player, int field) {
         //Checks which tax field the player landed on
         switch (field) {
             case 4:
                 //Choose between paying 10% of your wealth or 4000
                 String button = GUICreator.getInstance().getUserButtonPressed(Language.getLine("f5_desc"),
-                        Language.getLine("landOnTax4000"),Language.getLine("landOnTax10"));
+                        Language.getLine("landOnTax4000"), Language.getLine("landOnTax10"));
                 //If paying 4000
                 if (button.equals(Language.getLine("landOnTax4000"))) {
-                    bank.changeBalance(player,-4000);
+                    bank.changeBalance(player, -4000);
                     GUICreator.getInstance().showMessage(Language.getLine("landOnTax") + " 4000");
                     break;
                 }
@@ -306,11 +338,13 @@ public class GameController {
             case 38:
                 //Pay 2000
                 GUICreator.getInstance().showMessage(Language.getLine("f39_desc"));
-                bank.changeBalance(player,-2000);
+                bank.changeBalance(player, -2000);
         }
     }
 
-    /** Executes landing on a jail field */
+    /**
+     * Executes landing on a jail field
+     */
     private void jailAction(int player, int field) {
         //Checks which jail field the player landed on
         switch (field) {
@@ -321,33 +355,110 @@ public class GameController {
             case 30:
                 //Get arrested
                 GUICreator.getInstance().showMessage(Language.getLine("landOnJail2"));
-                bank.setPlayerPosition(player,10);
-                bank.setJailStatus(player,true);
+                bank.setPlayerPosition(player, 10);
+                bank.setJailStatus(player, true);
         }
     }
 
-    /** Lists all fields owned by the player in the center */
+    /**
+     * Lists all fields owned by the player in the center
+     */
     private void listFields(int player) {
         int[] pos = bank.getOwnedFields(player);
         String fieldList = "";
         //If the player owns any fields, add the first to the list
-        if (pos.length>0) {
-            fieldList = Language.getLine("f" + (pos[0] + 1) + "_title");
+        if (pos.length > 0) {
+            fieldList = getFieldName(pos[0]);
         }
         //For each field after the first, make a comma and add another to the list
-        for (int i=1; i<pos.length; i++) {
-            fieldList += ", "+Language.getLine("f"+(pos[i]+1)+"_title");
+        for (int i = 1; i < pos.length; i++) {
+            fieldList += ", " + getFieldName(pos[i]);
         }
         //Display the list in the center of the screen
-        GUICreator.getInstance().setChanceCard(Language.getLine("showFields")+" "+fieldList);
+        GUICreator.getInstance().setChanceCard(Language.getLine("showFields") + " " + fieldList);
     }
 
-    /** Forces the player to sell their fields or houses until they have a positive balance */
+    /** Returns the name of a field from the language file */
+    private String getFieldName(int field) {
+        return Language.getLine("f" + (field + 1) + "_title");
+    }
+
+    /**
+     * Forces the player to sell their fields or houses until they have a positive balance
+     */
     private void forceSale(int player) {
 
     }
 
-    /** Handles letting the player choose between buying, selling and ending their turn */
-    private void turnMenu(int player) {}
+    /**
+     * Handles letting the player choose between buying, selling and ending their turn
+     */
+    private void turnMenu(int player) {
+        GUI GUI = GUICreator.getInstance();
+        //Repeats until end turn is chosen
+        do {
+            //Decides the appropriate message for end turn
+            String endTurn = (playerTurn < player) ? Language.getLine("optionList4.1") : Language.getLine("optionList4.2");
+            //Makes the player choose between the 4 options listed
+            String[] optionsList = {Language.getLine("optionList1"), Language.getLine("optionList2"), Language.getLine("optionList3"), endTurn};
+            String button = GUI.getUserButtonPressed(Language.getLine("optionListm")+" "+bank.getPlayerName(player)+"?",optionsList);
+            if (button.equals(Language.getLine("optionList1"))) {
+                //Buy house/hotel
+                buyHouse(player);
+            }
+            if (button.equals(Language.getLine("optionList2"))) {
+                //Sell house/hotel
+            }
+            if (button.equals(Language.getLine("optionList3"))) {
+                //Sell field
+            }
+            if (button.equals(endTurn)) {
+                //End turn
+                return;
+            }
+        }
+        while (true);
+    }
+
+    private void buyHouse(int player) {
+        //Checks if the player can build anywhere
+        int buildable = bank.getBuildables(bank.getOwnedFields(player));
+        if (buildable == 0) {
+            GUICreator.getInstance().showMessage(Language.getLine("buildableNone"));
+            return;
+        }
+        //Makes a list of all fields the player can build on if they want to
+        else {
+            int[] buildFields = new int[buildable];
+            String[] buildNames = new String[buildable];
+            int temp = 0;
+            for (int i : bank.getOwnedFields(player)) {
+                if (bank.isBuildable(i)) {
+                    buildFields[temp] = i;
+                    buildNames[temp++] = getFieldName(i);
+                }
+            }
+            //Finds where the player wants to build
+            String choice = GUICreator.getInstance().getUserSelection(Language.getLine("buildableChoose"),buildNames);
+            int chosen = Arrays.asList(buildNames).indexOf(choice);
+            //Offers to build there
+            String building = (bank.getHouses(buildFields[chosen]) == 5) ? Language.getLine("hotel") : Language.getLine("house");
+            boolean buy = GUICreator.getInstance().getUserLeftButtonPressed(Language.getLine("buildChoice")+
+                    " " + building + Language.getLine("på") + " " + getFieldName(buildFields[chosen]) +
+                    Language.getLine("for") + " " + bank.getHousePrice(buildFields[chosen]), Language.getLine("pChoiceYes"),
+                    Language.getLine("pChoiceNo"));
+            //If the player agreed, check if they can afford it
+            if (buy) {
+                if (bank.getHousePrice(buildFields[chosen])>bank.getPlayerBalance(player)) {
+                    GUICreator.getInstance().showMessage(Language.getLine("buildCantAfford"));
+                }
+                else {
+                    bank.buyHouse(buildFields[chosen],player);
+                }
+            }
+        }
+    }
+
 }
+
 

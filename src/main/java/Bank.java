@@ -168,4 +168,30 @@ public class Bank {
     public void claimNeighbourhood(String nbh, int player) {
         fm.claimNeighbourhood(nbh, player);
     }
+
+    /** Returns whether the field is ready for development */
+    public boolean isBuildable(int field) {
+        return fm.isBuildable(field);
+    }
+
+    /** Returns how many of the listed fields the player can build on */
+    public int getBuildables(int[] fields) {
+        return fm.getBuildables(fields);
+    }
+
+    /** Returns the number of houses present on the field */
+    public int getHouses(int field) {
+        return fm.getHouses(field);
+    }
+
+    /** Returns the price of a house on the field */
+    public int getHousePrice(int field) {
+        return fm.getHousePrice(field);
+    }
+
+    /** Pays for and places a house on the field */
+    public void buyHouse(int field, int player) {
+        changeBalance(player, -fm.getHousePrice(field));
+        fm.claimField(field, player);
+    }
 }

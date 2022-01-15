@@ -122,6 +122,8 @@ pChoice3.m;. Da feltet ikke er ejet, har du mulighed for at købe det
 pChoice3.1;Køb felt
 pChoice3.2;Køb ikke
 pChoice3.1m;Tillykke, du ejer nu
+pChoiceYes;Ja
+pChoiceNo;nej
 prisonCardOut1;Det er din tur,
 prisonCardOut2;. Du er i fængsel men har et frisættelseskort. Du bliver øjeblikkeligt løsladt. Kast terningerne
 prisonRoll1;Tillykke, du er løsladt
@@ -143,5 +145,19 @@ landOnTax;Du har betalt
 landOnJail1;Du er på besøg i fængsel
 landOnJail2;Du er blevet arresteret. Ryk direkte i fængsel
 showFields;Du ejer følgende felter:
+optionList1;Køb hus/hotel
+optionList2;Sælg hus/hotel
+optionList3;Sælg grund
+optionList4.1;Tag ekstra tur
+optionList4.2;Afslut tur
+optionListm;Hvad vil du nu,
+buildableNone;Du kan ikke bygge nogen steder
+buildableChoose;Vælg en grund at bygge på:
+buildChoice;Ønsker du at bygge
+buildCantAfford;Du har ikke råd til at bygge her
+for;for
+on;på
+house;et hus
+hotel;et hotel
 endMessage;Spillet er slut!
 winner;har vundet spillet. Tillykke!
