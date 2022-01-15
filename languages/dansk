@@ -152,12 +152,19 @@ optionList4.1;Tag ekstra tur
 optionList4.2;Afslut tur
 optionListm;Hvad vil du nu,
 buildableNone;Du kan ikke bygge nogen steder
-buildableChoose;Vælg en grund at bygge på:
+buildableChoose;Vælg en grund at bygge på
 buildChoice;Ønsker du at bygge
 buildCantAfford;Du har ikke råd til at bygge her
+sellFieldNone;Du kan ikke sælge nogen felter
+sellFieldChoose;Vælg en grund at sælge
+sellChoice;Ønsker du at sælge
+sellHouseChoose;Vælg en grund at sælge et hus fra
+sellHouseNone;Du kan ikke sælge nogen huse
 for;for
 on;på
 house;et hus
 hotel;et hotel
+forceSale1;Du har en negativ balance. Sælg nogle af dine ejendomme for at fortsætte spillet
+forceSale2;Vælg hvad du vil sælge
 endMessage;Spillet er slut!
 winner;har vundet spillet. Tillykke!

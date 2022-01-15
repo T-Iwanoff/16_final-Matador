@@ -192,6 +192,18 @@ public class Bank {
     /** Pays for and places a house on the field */
     public void buyHouse(int field, int player) {
         changeBalance(player, -fm.getHousePrice(field));
-        fm.claimField(field, player);
+        fm.setHouses(field,fm.getHouses(field)+1);
+    }
+
+    /** Sells a field and makes it available again */
+    public void sellField(int field) {
+        changeBalance(fm.getOwner(field),fm.getPrice(field)/2);
+        fm.claimField(field,0);
+    }
+
+    /** Sells a house from the field */
+    public void sellHouse(int field) {
+        changeBalance(fm.getOwner(field),fm.getHousePrice(field)/2);
+        fm.setHouses(field,fm.getHouses(field)-1);
     }
 }

@@ -97,7 +97,10 @@ public class FieldManager {
 
     /** Returns the neighbourhood the field is in */
     public String getNeighbourhood(int field) {
-        return fields[posToNum(field)].getNeighbourhood();
+        if (fields[posToNum(field)].getType().equals("street")) {
+            return fields[posToNum(field)].getNeighbourhood();
+        }
+        else {return "none";}
     }
 
     /** Marks the player as the owner of the field */
@@ -153,15 +156,15 @@ public class FieldManager {
 
     /** Returns whether all fields in a neighbourhood is owned by the same player */
     public boolean checkNeighbourhood(String nbh, int player) {
-        boolean temp = true;
+        if (nbh.equals("none")) {return false;}
         for (Field i : fields) {
-            if (i.getNeighbourhood().equals(nbh)) {
+            if (getNeighbourhood(i.getPosition()).equals(nbh)) {
                 if (i.getOwner() != player) {
-                    temp = false;
+                    return false;
                 }
             }
         }
-        return temp;
+        return true;
     }
 
     /** Returns the field type */
@@ -169,15 +172,16 @@ public class FieldManager {
 
     /** Returns whether the field is ready for development */
     public boolean isBuildable(int field) {
-        //Checks whether the correct neighbourhood is owned
+        //Checks whether the field is a street
+        if (!getType(field).equals("street")) {return false;}
+        //Checks whether the neighbourhood is owned
         if (!isOwned(getNeighbourhood(field))) {return false;}
-        int houses = getHouses(field);
         //Checks whether the field is already full
-        if (houses == 5) {return false;}
+        if (getHouses(field) == 5) {return false;}
         //Checks whether the rest of the fields in the neighbourhood has at least as many houses
         for (Field i : fields) {
-            if (i.getNeighbourhood().equals(getNeighbourhood(field))) {
-                if (houses > i.getHouses()) {
+            if (getNeighbourhood(i.getPosition()).equals(getNeighbourhood(field))) {
+                if (getHouses(field) > i.getHouses()) {
                     return false;
                 }
             }
