@@ -156,6 +156,10 @@ public class GameController {
             gameEnd = true;
             return;
         }
+        //Checks whether the player ended up in jail
+        if (bank.getJailStatus(player)) {
+            return;
+        }
         //Checks whether the player needs to sell something to avoid going bankrupt
         if (bank.getPlayerBalance(player) <= 0) {
             forceSale(player);
@@ -210,7 +214,9 @@ public class GameController {
         String fieldType = GUICreator.getInstance().getFields()[field].getClass().getSimpleName();
         switch (fieldType) {
             case "GUI_Street":
-                streetAction(player, field);
+            case "GUI_Brewery":
+            case "GUI_Shipping":
+                ownableAction(player, field);
                 break;
             case "GUI_Chance":
                 //chanceAction(player);
@@ -218,14 +224,8 @@ public class GameController {
             case "GUI_Tax":
                 taxAction(player, field);
                 break;
-            case "GUI_Brewery":
-                //breweryAction(player);
-                break;
-            case "GUI_Shipping":
-                //shippingAction(player);
-                break;
             case "GUI_Jail":
-                //jailAction(player, field);
+                jailAction(player, field);
                 break;
             case "GUI_Start":
                 GUICreator.getInstance().showMessage(Language.getLine("landOnStart"));
@@ -237,7 +237,7 @@ public class GameController {
     }
 
     /** Executes landing on a street */
-    private void streetAction(int player, int field) {
+    private void ownableAction(int player, int field) {
         GUI GUI = GUICreator.getInstance();
         //Checks if the field is owned
         if (bank.isOwned(field)) {
@@ -289,6 +289,22 @@ public class GameController {
                 //Pay 2000
                 GUICreator.getInstance().showMessage(Language.getLine("f39_desc"));
                 bank.changeBalance(player,-2000);
+        }
+    }
+
+    /** Executes landing on a jail field */
+    private void jailAction(int player, int field) {
+        //Checks which jail field the player landed on
+        switch (field) {
+            case 10:
+                //Visiting jail
+                GUICreator.getInstance().showMessage(Language.getLine("landOnJail1"));
+                break;
+            case 30:
+                //Get arrested
+                GUICreator.getInstance().showMessage(Language.getLine("landOnJail2"));
+                bank.setPlayerPosition(player,10);
+                bank.setJailStatus(player,true);
         }
     }
 

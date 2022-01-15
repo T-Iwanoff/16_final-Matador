@@ -132,12 +132,14 @@ turnMsg2;. Kast terningerne
 rolledpair;Tillykke! Du slog to ens. Du får en ekstra tur
 rolled3pairs;Desvære! Dette er tredje gang du har slået to ens. Gå i fængsel
 landOnStart;Du er landet på start. Du får 4000kr af banken
-landOnRefuge;Du er landet på parkeringspladsen. Der sker ikke noget.
+landOnRefuge;Du holder pause på parkeringspladsen
 landOn;Du er landet på
 landOnOwned;\nDa feltet allerede er ejet, skal du betale leje
 landOnUnowned;\nDu har ikke råd til feltet
 landOnTax10;Betal 10%
 landOnTax4000;Betal 4000,-
 landOnTax;Du har betalt
+landOnJail1;Du er på besøg i fængsel
+landOnJail2;Du er blevet arresteret. Ryk direkte i fængsel
 endMessage;Spillet er slut!
 winner;har vundet spillet. Tillykke!
