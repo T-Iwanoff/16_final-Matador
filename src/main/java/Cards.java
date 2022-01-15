@@ -1,8 +1,8 @@
 public class Cards {
-    private int identification, action, value;
-
+    private int identification, value;
+    private String action;
     /** Constructor for cards */
-    public Cards(int ID,int act, int val) {
+    public Cards(int ID,String act, int val) {
         this.identification = ID;
         this.action = act;
         this.value = val;
@@ -11,7 +11,7 @@ public class Cards {
     public int getID() {
         return identification;
     }
-    public int getAction() {
+    public String getAction() {
         return action;
     }
     public int getValue() {
