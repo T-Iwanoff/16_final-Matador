@@ -199,7 +199,8 @@ public class GameController {
                 }
                 else if (i<2) {GUICreator.getInstance().showMessage(Language.getLine("prisonRoll2"));}
             }
-            GUICreator.getInstance().showMessage(Language.getLine("prisonRoll3")); //If the player failed to get out
+            //If the player failed to get out
+            GUICreator.getInstance().showMessage(Language.getLine("prisonRoll3"));
         }
     }
 
@@ -209,13 +210,13 @@ public class GameController {
         String fieldType = GUICreator.getInstance().getFields()[field].getClass().getSimpleName();
         switch (fieldType) {
             case "GUI_Street":
-                //streetAction(player, field);
+                streetAction(player, field);
                 break;
             case "GUI_Chance":
                 //chanceAction(player);
                 break;
             case "GUI_Tax":
-                //taxAction(player, field);
+                taxAction(player, field);
                 break;
             case "GUI_Brewery":
                 //breweryAction(player);
@@ -237,7 +238,58 @@ public class GameController {
 
     /** Executes landing on a street */
     private void streetAction(int player, int field) {
+        GUI GUI = GUICreator.getInstance();
+        //Checks if the field is owned
+        if (bank.isOwned(field)) {
+            GUI.showMessage(Language.getLine("landOn")+" "+Language.getLine("f"+(field+1)+"_title")+Language.getLine("landOnOwned"));
+            //Pay rent
+            bank.payRent(field,player,dc.getSum());
+        }
+        else {
+            //Checks if the player can afford the field
+            if (bank.getPlayerBalance(player)<bank.getFieldPrice(field)) {
+                GUI.showMessage(Language.getLine("landOn") + " " + Language.getLine("f" + (field + 1) + "_title")
+                        + Language.getLine("landOnUnowned"));
+                return;
+            }
+            //Offers for the player to buy the field
+            String button = GUI.getUserButtonPressed(Language.getLine("landOn")+" "
+                            +Language.getLine("f"+(field+1)+"_title")+Language.getLine("pChoice3.m"),
+                            Language.getLine("pChoice3.1"), Language.getLine("pChoice3.2"));
+            //If the player chose to buy it
+            if (button.equals(Language.getLine("pChoice3.1"))) {
+                bank.buyField(field,player);
+                GUI.showMessage(Language.getLine("pChoice3.1m")+" "+Language.getLine("f"+(field+1)+"_title"));
+            }
+        }
+    }
 
+    /** Executes landing on a tax field */
+    private void taxAction(int player, int field) {
+        //Checks which tax field the player landed on
+        switch (field) {
+            case 4:
+                //Choose between paying 10% of your wealth or 4000
+                String button = GUICreator.getInstance().getUserButtonPressed(Language.getLine("f5_desc"),
+                        Language.getLine("landOnTax4000"),Language.getLine("landOnTax10"));
+                //If paying 4000
+                if (button.equals(Language.getLine("landOnTax4000"))) {
+                    bank.changeBalance(player,-4000);
+                    GUICreator.getInstance().showMessage(Language.getLine("landOnTax") + " 4000");
+                    break;
+                }
+                //If paying 10%
+                if (button.equals(Language.getLine("landOnTax10"))) {
+                    int take10 = (bank.getPlayerBalance(player) + bank.sumAssets(player)) / 10;
+                    bank.changeBalance(player, -take10);
+                    GUICreator.getInstance().showMessage(Language.getLine("landOnTax") + " " + take10);
+                    break;
+                }
+            case 38:
+                //Pay 2000
+                GUICreator.getInstance().showMessage(Language.getLine("f39_desc"));
+                bank.changeBalance(player,-2000);
+        }
     }
 
     /** Forces the player to sell their fields or houses until they have a positive balance */

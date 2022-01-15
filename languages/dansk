@@ -118,6 +118,10 @@ pChoice2.1;Betal 1000,-
 pChoice2.2;Slå med terninger
 pChoice2.1m;Du har valgt at betale 1000,- for at forlade fængslet. Kast terningerne
 pChoice2.2m;Du har valgt at spille for din frihed! Kast terningerne
+pChoice3.m;\nDa feltet ikke er ejet, har du mulighed for at købe det
+pChoice3.1;Køb felt
+pChoice3.2;Køb ikke
+pChoice3.1m;Tillykke, du ejer nu
 prisonCardOut1;Det er din tur,
 prisonCardOut2;.\nDu er i fængsel men har et frisættelseskort. Du bliver øjeblikkeligt løsladt. Kast terningerne
 prisonRoll1;Tillykke, du er løsladt
@@ -129,5 +133,11 @@ rolledpair;Tillykke! Du slog to ens. Du får en ekstra tur
 rolled3pairs;Desvære! Dette er tredje gang du har slået to ens. Gå i fængsel
 landOnStart;Du er landet på start. Du får 4000kr af banken
 landOnRefuge;Du er landet på parkeringspladsen. Der sker ikke noget.
+landOn;Du er landet på
+landOnOwned;\nDa feltet allerede er ejet, skal du betale leje
+landOnUnowned;\nDu har ikke råd til feltet
+landOnTax10;Betal 10%
+landOnTax4000;Betal 4000,-
+landOnTax;Du har betalt
 endMessage;Spillet er slut!
 winner;har vundet spillet. Tillykke!

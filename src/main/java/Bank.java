@@ -144,5 +144,9 @@ public class Bank {
         return fm.isOwned(field);
     }
 
+    /** Returns the price of a field */
+    public int getFieldPrice(int field) {
+        return fm.getPrice(field);
+    }
 
 }
