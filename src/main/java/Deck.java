@@ -1,6 +1,14 @@
+import java.util.LinkedHashSet;
+import java.util.Random;
+import java.util.Set;
+
 public class Deck {
 
     private Cards[] cards;
+    private Random randNum = new Random(); //random number generator
+    private Set<Integer>set = new LinkedHashSet<Integer>(); //random number container
+    private Integer[] randomArray = {}; //random number array
+
 
     /** Constructor. Sets up the cards array */
     public Deck() {
@@ -53,5 +61,48 @@ public class Deck {
         cards[44] = new Cards(45,10,0);//Get jailCard
         cards[45] = new Cards(46,10,0);//Get jailCard
     }
+
+
+    /** create array with random card order*/
+    public void createDeck(){
+        while (set.size() < 45) {
+            set.add(randNum.nextInt(45)+1);
+        }
+
+        Integer[] randomArray = new Integer[set.size()];
+        randomArray = set.toArray(randomArray);
+}
+
+    /** reshuffle the deck*/
+    private void reShuffle(){
+        set.clear();
+        while (set.size() < 45) {
+            set.add(randNum.nextInt(45)+1);
+        }
+        randomArray = set.toArray(randomArray);
+    }
+
+    /** draw the top card of the deck and get the ID*/
+    public int drawCard(){
+        int cardsLeft = set.size();
+        int ID = -1;
+
+        if (cardsLeft > 0){
+            ++ID;
+            --cardsLeft;
+
+            return ID;
+        }
+        else{
+            reShuffle();
+            cardsLeft = set.size();
+            ID = -1;
+            ++ID;
+            --cardsLeft;
+
+            return ID;
+        }
+    }
+
 
 }
