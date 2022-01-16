@@ -25,8 +25,8 @@ public class Deck {
         cards[7] = new Cards(8,"interactBank",-1000);//Pay the bank
         cards[8] = new Cards(9,"interactBank",-200);//Pay the bank
         cards[9] = new Cards(10,"interactBank",-2000);//Pay the bank
-        cards[10] = new Cards(11,"interactBankHouses",0);//Pay the bank (house dependent)
-        cards[11] = new Cards(12,"interactBankHouses",0);//Pay the bank (house dependent)
+        cards[10] = new Cards(11,"interactBankHouses",500);//Pay the bank (house dependent)
+        cards[11] = new Cards(12,"interactBankHouses",800);//Pay the bank (house dependent)
         cards[12] = new Cards(13,"interactBank",500);//Receive from bank
         cards[13] = new Cards(14,"interactBank",500);//Receive from bank
         cards[14] = new Cards(15,"interactBank",1000);//Receive from bank
@@ -39,7 +39,7 @@ public class Deck {
         cards[21] = new Cards(22,"interactBank",1000);//Receive from bank
         cards[22] = new Cards(23,"interactBank",1000);//Receive from bank
         cards[23] = new Cards(24,"interactBank",200);//Receive from bank
-        cards[24] = new Cards(25,"interactBankCon",0);//Receive from bank (condition)
+        cards[24] = new Cards(25,"interactBankCon",15000);//Receive from bank (condition)
         cards[25] = new Cards(26,"getFromPlayer",200);//Receive from players
         cards[26] = new Cards(27,"getFromPlayer",500);//Receive from players
         cards[27] = new Cards(28,"getFromPlayer",500);//Receive from players
