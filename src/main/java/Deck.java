@@ -4,17 +4,17 @@ import java.util.Set;
 
 public class Deck {
 
-    private Cards[] cards;
-    private Random randNum = new Random(); //random number generator
-    private Set<Integer> set = new LinkedHashSet<>(); //random number container
-    private Integer[] randomArray = {}; //random number array
-    private int cardsSum = cards.length; //amount of chance cards in total
+    private final Cards[] cards;
+    private final Random randNum = new Random(); //random number generator
+    private final int deckSize = 46; //amount of chance cards in total
+    private int cardsLeft = 0; //The number of cards remaining in the deck
+    private Integer[] deck = new Integer[deckSize]; //An array of random numbers corresponding to the cards' index values
 
 
     /** Constructor. Sets up the cards array */
     public Deck() {
         //Creates a card object corresponding to each chance card in the game
-        cards = new Cards[46];
+        cards = new Cards[deckSize];
         cards[0] = new Cards(1,"interactBank",-1000);//Pay the bank
         cards[1] = new Cards(2,"interactBank",-300);//Pay the bank
         cards[2] = new Cards(3,"interactBank",-200);//Pay the bank
@@ -63,55 +63,42 @@ public class Deck {
         cards[45] = new Cards(46,"getJailCard",0);//Get jailCard
     }
 
-    /** create array with random card order */
-    public void createDeck(){
-        while (set.size() < cardsSum) {
-            set.add(randNum.nextInt(cardsSum)+1);
+    /** Shuffles the deck */
+    private void shuffleDeck(){
+        //Creates a list from 0 to 45 in random order
+        Set<Integer> set = new LinkedHashSet<>();
+        while (set.size() < deckSize) {
+            set.add(randNum.nextInt(deckSize));
         }
-        Integer[] randomArray = new Integer[set.size()];
-        randomArray = set.toArray(randomArray);
-}
-
-    /** reshuffle the deck */
-    private void reShuffle(){
-        set.clear();
-        while (set.size() < cardsSum) {
-            set.add(randNum.nextInt(cardsSum)+1);
+        //Adds the list to an array
+        deck = set.toArray(deck);
+        for (int i : deck) {
+            System.out.print(i+", ");
         }
-        randomArray = set.toArray(randomArray);
     }
 
-    /** draw the top card of the deck and get the Cards index for the cards array */
+    /** Draw the top card of the deck and return its index value */
     public int drawCard(){
-        int cardsLeft = set.size();
-        int currentCard = -1;
-
-        if (cardsLeft > 0){
-            ++currentCard;
-            --cardsLeft;
-            return currentCard;
+        //If there are no cards left, shuffle the deck
+        if (cardsLeft == 0) {
+            shuffleDeck();
+            cardsLeft = deckSize;
         }
-        else{
-            reShuffle();
-            cardsLeft = set.size();
-            currentCard = -1;
-            ++currentCard;
-            --cardsLeft;
-            return currentCard;
-        }
+        //Draw the next card from the deck
+        return deck[--cardsLeft];
     }
 
-    /** get action of the card*/
+    /** Get action of the card */
     public String getAction(int currentCard) {
         return cards[currentCard].getAction();
     }
 
-    /** get value of the card*/
+    /** Get value of the card*/
     public int getValue(int currentCard) {
         return cards[currentCard].getValue();
     }
 
-    /** get ID of the card*/
+    /** Get ID of the card*/
     public int getID(int currentCard) {
         return cards[currentCard].getID();
     }
