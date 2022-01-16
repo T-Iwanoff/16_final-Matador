@@ -206,4 +206,9 @@ public class Bank {
         changeBalance(fm.getOwner(field),fm.getHousePrice(field)/2);
         fm.setHouses(field,fm.getHouses(field)-1);
     }
+
+    /** Returns the field type */
+    public String getFieldType(int field) {
+        return fm.getType(field);
+    }
 }
