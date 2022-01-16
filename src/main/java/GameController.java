@@ -325,7 +325,7 @@ public class GameController {
         String cardAction = deck.getAction(currentCard);
         int cardValue = deck.getValue(currentCard);
         //Displays the card description
-        GUICreator.getInstance().displayChanceCard(Language.getLine("CD"+currentCard));
+        GUICreator.getInstance().displayChanceCard(Language.getLine("CD"+(currentCard+1)));
         //Checks which card the player drew
         switch (cardAction) {
             case "interactBank":
