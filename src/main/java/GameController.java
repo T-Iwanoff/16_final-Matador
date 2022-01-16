@@ -135,7 +135,8 @@ public class GameController {
             String button = GUICreator.getInstance().getUserButtonPressed(Language.getLine("pChoice1.m"),
                     Language.getLine("pChoice1.1"), Language.getLine("pChoice1.2"));
             if (button.equals(Language.getLine("pChoice1.2"))) {
-                gameEnd = true;
+                gameEnd = GUICreator.getInstance().getUserLeftButtonPressed(Language.getLine("pChoiceConfirm"),
+                        Language.getLine("pChoiceYes"), Language.getLine("pChoiceNo"));
             }
         }
     }
@@ -325,6 +326,7 @@ public class GameController {
         String cardAction = deck.getAction(currentCard);
         int cardValue = deck.getValue(currentCard);
         //Displays the card description
+        GUICreator.getInstance().showMessage(Language.getLine("landOnChance"));
         GUICreator.getInstance().displayChanceCard(Language.getLine("CD"+(currentCard+1)));
         //Checks which card the player drew
         switch (cardAction) {
@@ -561,9 +563,9 @@ public class GameController {
         int chosen = Arrays.asList(buildNames).indexOf(choice);
         int field = buildFields[chosen];
         //Offers to build there
-        String building = (bank.getHouses(field) == 5) ? Language.getLine("hotel") : Language.getLine("house");
+        String building = (bank.getHouses(field) == 4) ? Language.getLine("hotel") : Language.getLine("house");
         boolean buy = GUICreator.getInstance().getUserLeftButtonPressed(Language.getLine("buildChoice")+
-                        " " + building + Language.getLine("on") + " " + getFieldName(field) +
+                        " " + building + " " + Language.getLine("on") + " " + getFieldName(field) +
                         Language.getLine("for") + " " + bank.getHousePrice(field), Language.getLine("pChoiceYes"),
                         Language.getLine("pChoiceNo"));
         //If the player agreed, check if they can afford it
@@ -656,7 +658,7 @@ public class GameController {
         //Offers to sell from there
         String building = (bank.getHouses(field) == 5) ? Language.getLine("hotel") : Language.getLine("house");
         boolean sell = GUICreator.getInstance().getUserLeftButtonPressed(Language.getLine("sellChoice")+
-                        " " + building + Language.getLine("on") + " " + getFieldName(field) +
+                        " " + building + " " + Language.getLine("on") + " " + getFieldName(field) + " " +
                         Language.getLine("for") + " " + bank.getHousePrice(field)/2, Language.getLine("pChoiceYes"),
                         Language.getLine("pChoiceNo"));
         //If the player agreed, sell it
@@ -664,8 +666,8 @@ public class GameController {
             bank.sellHouse(field);
             //Removes the house
             GUI_Street street = (GUI_Street) GUICreator.getInstance().getFields()[field];
-            street.setHouses(bank.getHouses(field));
             street.setHotel(false);
+            street.setHouses(bank.getHouses(field));
         }
     }
 

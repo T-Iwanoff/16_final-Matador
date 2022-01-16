@@ -19,9 +19,9 @@ public class Field {
     }
 
     /** Constructor for breweries */
-    public Field(int pos, String type, int price) {
+    public Field(int pos, String type) {
         position = pos;
-        this.price = price;
+        price = 3000;
         this.type = type;
         owner = 0;
         rent = new int[] {0, 100, 200};
@@ -29,9 +29,9 @@ public class Field {
     }
 
     /** Constructor for ferries */
-    public Field(int pos, String type) {
+    public Field(int pos, String type, int price) {
         position = pos;
-        price = 4000;
+        this.price = 4000;
         this.type = type;
         owner = 0;
         houses = 0;

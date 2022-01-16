@@ -32,7 +32,7 @@ public class Bank {
     public void payRent(int field, int player, int diceSum) {
         String fieldType = fm.getType(field);
         int payee = fm.getOwner(field);
-        int number = fm.getOwnedByType(fieldType, player);
+        int number = fm.getOwnedByType(fieldType, payee);
 
         switch (fieldType){
             case "street":

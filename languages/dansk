@@ -168,6 +168,7 @@ pChoice3.m;. Da feltet ikke er ejet, har du mulighed for at købe det
 pChoice3.1;Køb felt
 pChoice3.2;Køb ikke
 pChoice3.1m;Tillykke, du ejer nu
+pChoiceConfirm;Er du sikker?
 pChoiceYes;Ja
 pChoiceNo;nej
 prisonCardOut1;Det er din tur,
@@ -190,6 +191,7 @@ landOnTax4000;Betal 4000,-
 landOnTax;Du har betalt
 landOnJail1;Du er på besøg i fængsel
 landOnJail2;Du er blevet arresteret. Ryk direkte i fængsel
+landOnChance;Du er landet på prøv lykken. Træk et chancekort
 showFields;Du ejer følgende felter:
 optionList1;Køb hus/hotel
 optionList2;Sælg hus/hotel
