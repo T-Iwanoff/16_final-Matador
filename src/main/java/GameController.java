@@ -168,11 +168,11 @@ public class GameController {
                 bank.setJailStatus(player, true);
                 bank.setPlayerPosition(player, 10);
                 pairsRolled = 0;
-                GUICreator.getInstance().showMessage(Language.getLine("rolled3pairs"));
+                GUICreator.getInstance().showMessage(Language.getLine("rolled3Pairs"));
                 return;
             }
             playerTurn--;
-            GUICreator.getInstance().showMessage(Language.getLine("rolledpair"));
+            GUICreator.getInstance().showMessage(Language.getLine("rolledPair"));
         }
         //If they didn't roll a pair, resets pair counter
         else {
@@ -284,7 +284,7 @@ public class GameController {
         GUI GUI = GUICreator.getInstance();
         //Checks if the field is owned
         if (bank.isOwned(field)) {
-            //Checks if the player owns the field themself
+            //Checks if the player owns the field themselves
             if (bank.getFieldOwner(field) == player) {
                 GUI.showMessage(Language.getLine("landOn") + " " + getFieldName(field) + Language.getLine("landOnOwn"));
             } else {
@@ -602,7 +602,7 @@ public class GameController {
             }
             else {
                 bank.buyHouse(field,player);
-                //Placerer huset
+                //Places the house
                 GUI_Street street = (GUI_Street) GUICreator.getInstance().getFields()[field];
                 if (bank.getHouses(field)<5) {
                     street.setHouses(bank.getHouses(field));

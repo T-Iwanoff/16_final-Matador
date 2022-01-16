@@ -6,7 +6,7 @@ public class Deck {
 
     private Cards[] cards;
     private Random randNum = new Random(); //random number generator
-    private Set<Integer>set = new LinkedHashSet<Integer>(); //random number container
+    private Set<Integer> set = new LinkedHashSet<>(); //random number container
     private Integer[] randomArray = {}; //random number array
     private int cardsSum = cards.length; //amount of chance cards in total
 
@@ -63,8 +63,7 @@ public class Deck {
         cards[45] = new Cards(46,"getJailCard",0);//Get jailCard
     }
 
-
-    /** create array with random card order*/
+    /** create array with random card order */
     public void createDeck(){
         while (set.size() < cardsSum) {
             set.add(randNum.nextInt(cardsSum)+1);
@@ -73,7 +72,7 @@ public class Deck {
         randomArray = set.toArray(randomArray);
 }
 
-    /** reshuffle the deck*/
+    /** reshuffle the deck */
     private void reShuffle(){
         set.clear();
         while (set.size() < cardsSum) {
@@ -82,7 +81,7 @@ public class Deck {
         randomArray = set.toArray(randomArray);
     }
 
-    /** draw the top card of the deck and get the Cards index for the cards array*/
+    /** draw the top card of the deck and get the Cards index for the cards array */
     public int drawCard(){
         int cardsLeft = set.size();
         int currentCard = -1;
