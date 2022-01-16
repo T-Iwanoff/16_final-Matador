@@ -147,7 +147,7 @@ public class FieldManager {
     public int getOwnedByType(String type, int player) {
         int temp = 0;
         for (Field i : fields) {
-            if (i.getType() == type && i.getOwner() == player) {
+            if (i.getType().equals(type) && i.getOwner() == player) {
                 temp++;
             }
         }
