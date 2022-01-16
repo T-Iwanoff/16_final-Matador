@@ -72,9 +72,6 @@ public class Deck {
         }
         //Adds the list to an array
         deck = set.toArray(deck);
-        for (int i : deck) {
-            System.out.print(i+", ");
-        }
     }
 
     /** Draw the top card of the deck and return its index value */
