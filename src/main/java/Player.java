@@ -41,9 +41,9 @@ public class Player {
     }
 
     /** Moves the player a given distance */
-    public void movePlayer(int fields) {
+    public void movePlayer(int distance) {
         GUI_Field[] guiFields = GUICreator.getInstance().getFields();
-        for (int i = 0; i < fields; i++) {
+        for (int i = 0; i < distance; i++) {
             guiFields[position].setCar(GUIPlayer, false);
             position++;
             if (position == guiFields.length) {
