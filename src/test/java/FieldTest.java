@@ -6,7 +6,7 @@ public class FieldTest {
     Field Street, Brewery, Ferry;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         Street = new Field(1,1500,1000,100,400,1000,2000,4000,10000,"street","nbh1");
         Brewery = new Field(2,"brewery");
         Ferry = new Field(3,"ferry",4000);

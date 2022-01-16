@@ -6,7 +6,7 @@ public class PlayerTest {
     private Player player;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         player = new Player("tester");
     }
 

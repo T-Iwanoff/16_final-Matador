@@ -6,7 +6,7 @@ public class DieTest {
     private Die die;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         die = new Die(6);
     }
 

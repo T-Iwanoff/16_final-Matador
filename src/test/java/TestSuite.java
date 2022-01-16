@@ -6,7 +6,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         DieTest.class,
         FieldTest.class,
-        PlayerTest.class
+        PlayerTest.class,
+        DiceCupTest.class,
+        FieldManagerTest.class
 })
 
 public class TestSuite {
