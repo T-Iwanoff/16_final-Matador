@@ -6,19 +6,19 @@ public class PlayerTest {
     private Player player;
 
     @Before
-    void setUp() throws Exception {
+    public void setUp() throws Exception {
         player = new Player("tester");
     }
 
     @Test
-    void testConstructor() {
+    public void testConstructor() {
         Assert.assertEquals("tester",player.getName()); //Player should get the name specified in the setUp
         Assert.assertEquals(0,player.getPosition()); //Player should that at position 0
     }
 
 
     @Test
-    void testMovePlayer() {
+    public void testMovePlayer() {
         player.movePlayer(5);
         Assert.assertEquals(5,player.getPosition()); //The player should have moved 5 fields
         player.movePlayer(6);
