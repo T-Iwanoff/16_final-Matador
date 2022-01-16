@@ -188,6 +188,7 @@ public class GameController {
         }
         //Checks whether the player ended up in jail
         if (bank.getJailStatus(player)) {
+            pairsRolled = 0;
             return;
         }
         //Updates the player's owned fields
@@ -319,54 +320,38 @@ public class GameController {
      * Executes landing on a chance field
      */
     private void chanceAction(int player) {
+        //Draws a card and retrieves all the relevant information
         int currentCard = deck.drawCard();
-        int cardID = deck.getID(currentCard);
         String cardAction = deck.getAction(currentCard);
         int cardValue = deck.getValue(currentCard);
-        int currentPos = bank.getPlayerPosition(player);
-        String currentPosType = bank.getFieldType(currentPos);
-
-        //Checks which chance card the player drew
+        //Displays the card description
+        GUICreator.getInstance().displayChanceCard(Language.getLine("CD"+currentCard));
+        //Checks which card the player drew
         switch (cardAction) {
             case "interactBank":
-                // change player balance based on the card value
+                //Changes the player's balance based on the card value
                 bank.changeBalance(player, cardValue);
                 break;
 
-
             case "interactBankHouses":
-                //change player balance based on the amount of houses
+                //Changes the player's balance based on the amount of houses owned
+                //Counts the player's houses and hotels
                 int sumHouses = 0;
                 int sumHotels = 0;
-                int totalOnField;
-                int [] ownedFields = bank.getOwnedFields(player);
-
-                //check for houses and hotels on field
-                for (int i : ownedFields){
-                    totalOnField = bank.getHouses(i);
-                    if (totalOnField == 5){
-                    ++sumHotels;
-                    }
-                    else {
-                        sumHouses += bank.getHouses(i);
-                    }
+                for (int i : bank.getOwnedFields(player)) {
+                    if (bank.getHouses(i) == 5) {sumHotels++;}
+                    else {sumHouses += bank.getHouses(i);}
                 }
-
-                //change player dependent on the card value and amount of houses/hotels
-                int totalCost;
-                if(cardValue == 500){
-                    totalCost = sumHouses * 500 + sumHotels * 2000;
-                }
-                else {
-                    totalCost = sumHouses * 800 + sumHotels * 2300;
-                }
+                //Charges the player for their owned buildings
+                int totalCost = 0;
+                totalCost += sumHouses*cardValue;
+                totalCost += sumHotels*(cardValue+1500);
                 bank.changeBalance(player, -totalCost);
                 break;
 
             case "interactBankCon":
-                //Receive 15.000 if assets < 40.000
-                int assets = bank.sumAssets(player);
-
+                //Gives the player 15.000 if their assets < 40.000
+                int assets = bank.sumAssets(player)+bank.getPlayerBalance(player);
                 if(assets < 40000){
                     bank.changeBalance(player, 15000);
                 }
@@ -376,61 +361,47 @@ public class GameController {
                 break;
 
             case "getFromPlayer":
-                //Get money from all the players in the game
-                int playerAmount = bank.getPlayerCount() - 1; //minus 1 so it doesn't count the player itself
-                int totalGet = playerAmount * cardValue;
-                int playersLost = -cardValue;
-
-                bank.changeBalance(player, totalGet);
+                //Makes all players pay the player
+                for (int payer = 1; payer <= bank.getPlayerCount(); payer++) {
+                    bank.payTo(payer,player,cardValue);
+                }
                 break;
 
             case "movePlayer":
-                //move player forwards or backwards an amount of spaces.
-                bank.movePlayer(player, cardValue);
+                //Moves player forwards or backwards an amount of spaces.
+                bank.setPlayerPosition(player,bank.getPlayerPosition(player)+cardValue);
                 fieldAction(player, bank.getPlayerPosition(player));
                 break;
 
             case "moveToField":
-                //Move to a specific field
-                bank.setPlayerPosition(player, cardValue);
-                if (bank.getPlayerPosition(player) > cardValue) {
-                    bank.changeBalance(player,4000);
-                }
+                //Moves player to a specific field
+                int distance = cardValue-bank.getPlayerPosition(player);
+                if (distance<0) {distance += 40;}
+                bank.movePlayer(player,distance);
                 fieldAction(player, bank.getPlayerPosition(player));
                 break;
 
             case "moveClosest2x":
-                //move to the closest ferry and pay double the rent
-                for (int i = currentPos; i < currentPos+1; i++){
-                    if(!"ferry".equals(currentPosType)){
-                        bank.movePlayer(player, 1);
-                    }
-                    else {
-                        fieldAction(player, bank.getPlayerPosition(player));
-                        bank.payRent(currentPos,player,0);
-                        break;
-                    }
+                //Moves player to the closest ferry and pays double the rent
+                while (!bank.getFieldType(bank.getPlayerPosition(player)).equals("ferry")) {
+                    bank.movePlayer(player, 1);
                 }
+                fieldAction(player, bank.getPlayerPosition(player));
+                bank.payRent(bank.getPlayerPosition(player),player,0);
                 break;
 
             case "moveClosest":
-                //move to the closest ferry
-                for (int i = currentPos; i < currentPos+1; i++){
-                    if(!"ferry".equals(currentPosType)){
-                        bank.movePlayer(player, 1);
-                    }
-                    else {
-                        fieldAction(player, bank.getPlayerPosition(player));
-                        break;
-                    }
+                //Moves player to the closest ferry and pays rent
+                while (!bank.getFieldType(bank.getPlayerPosition(player)).equals("ferry")) {
+                    bank.movePlayer(player, 1);
                 }
+                fieldAction(player, bank.getPlayerPosition(player));
                 break;
 
             case "moveToJail":
-                //get sent to jail
+                //Sends the player to jail
                 bank.setJailStatus(player, true);
                 bank.setPlayerPosition(player, 10);
-                pairsRolled = 0;
                 break;
 
             case "getJailCard":

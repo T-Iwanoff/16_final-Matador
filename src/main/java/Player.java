@@ -76,7 +76,12 @@ public class Player {
     public int getPosition() {return position;}
 
     /** Sets the player's position */
-    public void setPosition(int position) {this.position = position;}
+    public void setPosition(int position) {
+        GUI_Field[] guiFields = GUICreator.getInstance().getFields();
+        guiFields[this.position].setCar(GUIPlayer, false);
+        this.position = position;
+        guiFields[this.position].setCar(GUIPlayer, true);
+    }
 
     /** Returns the player's name */
     public String getName() {return name;}

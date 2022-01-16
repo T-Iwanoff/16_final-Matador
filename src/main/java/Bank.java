@@ -59,7 +59,7 @@ public class Bank {
     /** Returns the sum of all players non-liquid assets. */
     public int sumAssets(int player) {
         int sum = 0;
-        int [] ownedFields = fm.getOwnedFields(player);
+        int[] ownedFields = fm.getOwnedFields(player);
         for (int i : ownedFields){
             sum += (int) ((fm.getPrice(i) * 0.5) + (fm.getHouses(i) * fm.getHousePrice(i) * 0.5));
         }
@@ -127,11 +127,11 @@ public class Bank {
     }
 
     /** Moves the player a given distance */
-    public void movePlayer(int player, int fields) {
-        if ((fields+pm.getPosition(player)) >= 40) {
+    public void movePlayer(int player, int distance) {
+        if ((distance+pm.getPosition(player)) >= 40) {
             changeBalance(player,4000);
         }
-        pm.movePlayer(player,fields);
+        pm.movePlayer(player,distance);
     }
 
     /** Returns the owner of the field */
